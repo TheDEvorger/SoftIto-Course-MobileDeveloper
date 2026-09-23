@@ -1,0 +1,51 @@
+*,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chip-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .chip {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334115;
+        }
+
+        .card-reader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+.card-reader h3 {
+    font-size: 16px;
+}
+
+.card-reader p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.card-reader button {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+}

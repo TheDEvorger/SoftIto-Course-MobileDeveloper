@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobil Dashboard</title>
+    <link rel="stylesheet" href="mobil_dashboard.css">
+</head>
+
+<body>
+    <div class="phone-container">
+        <!--sticky üst bar-->
+        <header class="top-bar">
+            <div class="user-profile">
+                <div class="avatar">SÇ</div>
+                <div>
+                    <p class="welcome-text">Hoş Geldin,</p>
+                    <strong>Selahaddin ÇİFTÇİ</strong>
+                </div>
+            </div>
+            <button class="notification-btn">🔔</button>
+
+        </header>
+
+        <!--Bakiye Kartı-->
+        <section class="balance-card">
+            <span class="card-chip-badge">PLATINIUM</span>
+            <p class="balance-label">Toplam Varlıklarım</p>
+            <div class="balance-num">142.850.00 $</div>
+            <p class="iban-text">IBAN TR45 0006 1005 **** 9210</p>
+        </section>
+
+        <!--4lü Hızlı Aksiyon Butonu-->
+        <section class="quick-actions">
+            <button class="action-btn">
+                <div class="icon-circle">💳</div>
+                <span>Ödemeler</span>
+            </button>
+            <button class="action-btn">
+                <div class="icon-circle">↗️</div>
+                <span>Transfer</span>
+            </button>
+            <button class="action-btn">
+                <div class="icon-circle">📈</div>
+                <span>Yatırım</span>
+            </button>
+            <button class="action-btn">
+                <div class="icon-circle">QR</div>
+                <span>Karekod</span>
+            </button>
+        </section>
+
+
+        <!--Son Hareketler-->
+        <section class="tx-section">
+            <h4 class="section-title">Son Hesap Hareketleri</h4>
+
+            <div class="tx-item">
+                <div class="tx-left">
+                    <div class="tx-icon tx-icon-education">💼</div>
+                    <div>
+                        <div class="tx-title">Eğitim Hakedişi</div>
+                        <div class="tx-date">Bugün,14:30-Havale</div>
+                    </div>
+                </div>
+                <div class="tx-amount">+130.000 $</div>
+            </div>
+
+            <div class="tx-item">
+                <div class="tx-left">
+                    <div class="tx-icon">💼</div>
+                    <div>
+                        <div class="tx-title">Kredi Kapatma</div>
+                        <div class="tx-date">20 Eyl,14:30-Kredi</div>
+                    </div>
+                </div>
+                <div class="tx-amount negative">-60.000 $</div>
+            </div>
+
+            <div class="tx-item">
+                <div class="tx-left">
+                    <div class="tx-icon tx-icon-coffee">💼</div>
+                    <div>
+                        <div class="tx-title">Kahve Aldık :)</div>
+                        <div class="tx-date">Bugün,13:30-Nakit</div>
+                    </div>
+                </div>
+                <div class="tx-amount negative">-250.00 $</div>
+            </div>
+
+
+
+        </section>
+
+
+    </div>
+</body>
+
+</html>
