@@ -33,44 +33,59 @@
             <section class="product-image-area">
 
                 <span class="badge discount-badge">%24 İNDİRİM</span>
-
-                <span class="badge shipping-badge">
-                    KARGO BEDAVA
-                </span>
+                <span class="badge shipping-badge">KARGO BEDAVA</span>
 
                 <img
-                    src="parfum-ana.jpg"
+                    id="mainProductImage"
+                    src="https://raw.githubusercontent.com/TheDEvorger/SoftIto-Course-MobileDeveloper/main/22%20Eyl%C3%BCl%20%C3%96dev/92dd3a8b-f0e8-46fe-9ea2-d4c1c4349f3f.png"
                     alt="ǼꞎŚǽɍƒɇɬⱮʏɍ Parfüm"
                     class="product-image"
+                    fetchpriority="high"
+                    decoding="async"
                 >
 
             </section>
 
 
-            <section class="thumbnail-list">
+            <div class="thumbnail-list">
 
-                <div class="thumbnail active">
+                <button
+                    class="thumbnail active"
+                    data-image="https://raw.githubusercontent.com/TheDEvorger/SoftIto-Course-MobileDeveloper/main/22%20Eyl%C3%BCl%20%C3%96dev/92dd3a8b-f0e8-46fe-9ea2-d4c1c4349f3f.png"
+                >
                     <img
-                        src="parfum-ana.jpg"
-                        alt="Parfüm ön görünüm"
+                        src="https://raw.githubusercontent.com/TheDEvorger/SoftIto-Course-MobileDeveloper/main/22%20Eyl%C3%BCl%20%C3%96dev/92dd3a8b-f0e8-46fe-9ea2-d4c1c4349f3f.png"
+                        alt="Ana ürün görünümü"
                     >
-                </div>
+                </button>
 
-                <div class="thumbnail">
+
+                <button
+                    class="thumbnail"
+                    data-image="https://raw.githubusercontent.com/TheDEvorger/SoftIto-Course-MobileDeveloper/main/22%20Eyl%C3%BCl%20%C3%96dev/6fbfa5e5-227a-4fed-8656-3d9f0b90e075.png"
+                >
                     <img
-                        src="parfum-ana.jpg"
-                        alt="Parfüm detay görünüm"
+                        src="https://raw.githubusercontent.com/TheDEvorger/SoftIto-Course-MobileDeveloper/main/22%20Eyl%C3%BCl%20%C3%96dev/6fbfa5e5-227a-4fed-8656-3d9f0b90e075.png"
+                        alt="İkinci ürün görünümü"
+                        loading="lazy"
+                        decoding="async"
                     >
-                </div>
+                </button>
 
-                <div class="thumbnail">
+
+                <button
+                    class="thumbnail"
+                    data-image="https://raw.githubusercontent.com/TheDEvorger/SoftIto-Course-MobileDeveloper/main/22%20Eyl%C3%BCl%20%C3%96dev/b043f8f6-2a8e-41e9-aceb-9dcad1e23b70.png"
+                >
                     <img
-                        src="parfum-ana.jpg"
-                        alt="Parfüm koleksiyon görünümü"
+                        src="https://raw.githubusercontent.com/TheDEvorger/SoftIto-Course-MobileDeveloper/main/22%20Eyl%C3%BCl%20%C3%96dev/b043f8f6-2a8e-41e9-aceb-9dcad1e23b70.png"
+                        alt="Üçüncü ürün görünümü"
+                        loading="lazy"
+                        decoding="async"
                     >
-                </div>
+                </button>
 
-            </section>
+            </div>
 
 
             <section class="product-info">
@@ -103,12 +118,12 @@
 
                 <div class="price-area">
 
-                    <strong class="current-price">
+                    <strong class="current-price" id="currentPrice">
                         2.490 ₺
                     </strong>
 
-                    <del class="old-price">
-                        3.290 ₺
+                    <del class="old-price" id="oldPrice">
+                        3.280 ₺
                     </del>
 
                 </div>
@@ -134,19 +149,35 @@
 
                     <div class="size-list">
 
-                        <button class="size-chip">
+                        <button
+                            class="size-chip"
+                            data-size="30 ML"
+                            data-price="1.990 ₺"
+                            data-old-price="2.620 ₺">
                             30 ML
                         </button>
 
-                        <button class="size-chip active">
+                        <button
+                            class="size-chip active"
+                            data-size="50 ML"
+                            data-price="2.490 ₺"
+                            data-old-price="3.280 ₺">
                             50 ML
                         </button>
 
-                        <button class="size-chip">
+                        <button
+                            class="size-chip"
+                            data-size="75 ML"
+                            data-price="2.990 ₺"
+                            data-old-price="3.940 ₺">
                             75 ML
                         </button>
 
-                        <button class="size-chip">
+                        <button
+                            class="size-chip"
+                            data-size="100 ML"
+                            data-price="3.490 ₺"
+                            data-old-price="4.590 ₺">
                             100 ML
                         </button>
 
@@ -243,7 +274,7 @@
 
                 <span>Toplam</span>
 
-                <strong>
+                <strong id="bottomPrice">
                     2.490 ₺
                 </strong>
 
@@ -257,6 +288,56 @@
 
     </div>
 
+
+    <script>
+
+        const mainProductImage = document.getElementById("mainProductImage");
+        const thumbnails = document.querySelectorAll(".thumbnail");
+
+        thumbnails.forEach(function(thumbnail) {
+
+            thumbnail.addEventListener("click", function() {
+
+                thumbnails.forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+                thumbnail.classList.add("active");
+
+                mainProductImage.src = thumbnail.dataset.image;
+
+            });
+
+        });
+
+
+        const sizeChips = document.querySelectorAll(".size-chip");
+
+        const currentPrice = document.getElementById("currentPrice");
+        const oldPrice = document.getElementById("oldPrice");
+        const bottomPrice = document.getElementById("bottomPrice");
+
+        sizeChips.forEach(function(chip) {
+
+            chip.addEventListener("click", function() {
+
+                sizeChips.forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+                chip.classList.add("active");
+
+                currentPrice.textContent = chip.dataset.price;
+                oldPrice.textContent = chip.dataset.oldPrice;
+                bottomPrice.textContent = chip.dataset.price;
+
+            });
+
+        });
+
+    </script>
+
+
 </body>
 
-</html>
+</html>>
