@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle-Charger-Station</title>
+</head>
+<body>
+    <script>
+        //şarj süresini dakika cinsinden verilecek
+        //verilecek değerler->
+        //mevcut yüzde
+        //hedef yüzde
+        //bataryakwh
+        //istasyonkw
+
+        const araclar = {
+            m1: {
+                isim: "Rimac_Nevera_R",
+                bataryaKWh: 108,
+                mevcutYuzde: 100,
+                hedefYuzde: 84,
+                tarifePaketi: "gündüz"
+            },
+            m2: {
+                isim: "Lotus_Evija",
+                bataryaKWh: 93,
+                mevcutYuzde: 36,
+                hedefYuzde: 91,
+                tarifePaketi: "gece"
+            },
+            m3: {
+                isim: "Rolls_Royce_Spectre",
+                bataryaKWh: 118.1,
+                mevcutYuzde: 76,
+                hedefYuzde: 76,
+                tarifePaketi: "gündüz"
+            },
+            m4: {
+                isim: "Maserati_GranTurismo_Folgore",
+                bataryaKWh: 92.5,
+                mevcutYuzde: 43,
+                hedefYuzde: 88,
+                tarifePaketi: "gündüz"
+            },
+            m5: {
+                isim: "Lucid_Air_Sapphire",
+                bataryaKWh: 118,
+                mevcutYuzde: 12,
+                hedefYuzde: 95,
+                tarifePaketi: "gece"
+            },
+            m6: {
+                isim: "Porsche_Taycan_Turbo_GT",
+                bataryaKWh: 105,
+                mevcutYuzde: 89,
+                hedefYuzde: 72,
+                tarifePaketi: "gündüz"
+            },
+            m7: {
+                isim: "Lotus_Eletre_R",
+                bataryaKWh: 112,
+                mevcutYuzde: 90,
+                hedefYuzde: 90,
+                tarifePaketi: "gece"
+            },
+            m8: {
+                isim: "Audi_SQ8_e_tron",
+                bataryaKWh: 114,
+                mevcutYuzde: 8,
+                hedefYuzde: 79,
+                tarifePaketi: "gündüz"
+            },
+            m9: {
+                isim: "Hyundai_Ioniq_5_N",
+                bataryaKWh: 84,
+                mevcutYuzde: 33,
+                hedefYuzde: 87,
+                tarifePaketi: "gündüz"
+            },
+            m10: {
+                isim: "Kia_EV6_GT",
+                bataryaKWh: 84,
+                mevcutYuzde: 46,
+                hedefYuzde: 93,
+                tarifePaketi: "gece"
+            },
+            m11: {
+                isim: "Pininfarina_B95",
+                bataryaKWh: 120,
+                mevcutYuzde: 96,
+                hedefYuzde: 80,
+                tarifePaketi: "gündüz"
+            },
+            m12: {
+                isim: "MG_Cyberster",
+                bataryaKWh: 77,
+                mevcutYuzde: 100,
+                hedefYuzde: 72,
+                tarifePaketi: "gündüz"
+            },
+            m13: {
+                isim: "Rivian_R1T_Max_Pack",
+                bataryaKWh: 141.5,
+                mevcutYuzde: 14,
+                hedefYuzde: 85,
+                tarifePaketi: "gece"
+            },
+            m14: {
+                isim: "GMC_Sierra_EV_Denali_Max_Range",
+                bataryaKWh: 205,
+                mevcutYuzde: 27,
+                hedefYuzde: 94,
+                tarifePaketi: "gündüz"
+            },
+            m15: {
+                isim: "Entegra_Coach_Embark",
+                bataryaKWh: 140,
+                mevcutYuzde: 87,
+                hedefYuzde: 65,
+                tarifePaketi: "gece"
+            },
+            m16: {
+                isim: "Winnebago_eRV2",
+                bataryaKWh: 68,
+                mevcutYuzde: 19,
+                hedefYuzde: 74,
+                tarifePaketi: "gündüz"
+            }
+        };
+
+        const istasyonKW=50;
+        const gunduzfiyatparametresi=20; //tl cinsinden
+        const gecefiyatparametresi=30;   //tl cinsinden
+        
+        function tarifem(tarifePaketi){
+            if (tarifePaketi=="gündüz"){return gunduzfiyatparametresi}
+            else if(tarifePaketi=="gece"){return gecefiyatparametresi}
+            else{return 0}
+        }
+
+        for(const arac in araclar){
+
+            tarifem(araclar[arac].tarifePaketi)
+
+            if(araclar[arac].hedefYuzde>araclar[arac].mevcutYuzde){
+                const yuzdedolummiktari = araclar[arac].hedefYuzde-araclar[arac].mevcutYuzde;
+                const kalandolumzamani = (yuzdedolummiktari/100*araclar[arac].bataryaKWh/istasyonKW*60).toFixed(2);
+                const tutar=(kalandolumzamani*tarifem(araclar[arac].tarifePaketi)).toFixed(2);
+
+                const uyarimesaji = `Hoşgeldiniz, ${araclar[arac].isim} model aracınızın şarj edilmeye başlandı tahmini süre ${kalandolumzamani} dakikadır. Süre bitiminde ödeyeceğiniz tutar ${araclar[arac].tarifePaketi} tarifesi gereğince ${tutar} ₺'dir. Bizi tercih ettiğiniz için teşekkür eder iyi yolculuklar dileriz.`
+                console.log(uyarimesaji)
+            }
+            else if(araclar[arac].hedefYuzde==araclar[arac].mevcutYuzde){
+                const uyarimesaji = `${araclar[arac].isim} model aracınızı şarj etmek istediğiniz değer ile sahip olduğuz şarj yüzde aynı olduğu tespit edilmiştir lütfen ${araclar[arac].hedefYuzde}'den yüksek bir rakam giriniz.`;
+                console.log(uyarimesaji);
+            }
+            else if(araclar[arac].mevcutYuzde==100){
+                const uyarimesaji = `${araclar[arac].isim} model aracınızın deposu tamamıyla dolu olduğu tespit edilmiştir, deponuzu şarj etmenize gerek kalmamıştır, bizi tercih ettiğiniz için teşekkür eder iyi günler dileriz.`;
+                console.log(uyarimesaji);
+            }
+            else{
+                const uyarimesaji = `${araclar[arac].isim} model aracınızın şarj etmek istediğiniz değerden daha fazla şarj yüzdesine sahip olduğuz tespit edilmiştir lütfen ${araclar[arac].hedefYuzde}'den yüksek bir rakam giriniz.`;
+                console.log(uyarimesaji);
+            }
+        }
+
+
+    </script>
+    
+</body>
+</html>     
+     
+     
+     
+     
+     
+     
+     
+     
+  

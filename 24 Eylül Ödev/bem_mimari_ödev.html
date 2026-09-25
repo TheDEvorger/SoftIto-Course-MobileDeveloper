@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem Css Mimarisi</title>
+    <link rel="stylesheet" href="bem_mimari_ödev.css">
+</head>
+
+<body>
+    <!-- BEM standartlarına uygun kart yapısı -->
+    <article class="product-item">
+
+        <!-- Eski Kod
+        <div class="product-item__visual">
+            <span class="product-item__tag product-item__tag--highlight">El yapımı</span>
+        </div>
+        artık kullanmıyoruz. -->
+
+
+        
+        <!-- Yeni Kod -->
+        <div class="product-item__visual">
+
+            <img
+                class="product-item__image"
+                src="https://i.pinimg.com/1200x/f7/a4/d0/f7a4d00d95196e013033f69b22556336.jpg"
+                alt="Masif Ahşap Koltuk"
+            >
+
+            <span class="product-item__tag product-item__tag--highlight">
+                El yapımı
+            </span>
+
+        </div>
+        <!-- Yeni Kod -->
+
+
+
+        <div class="product-item__body">
+            <h3 class="product-item__title">Masif Koltuk</h3>
+
+            <p class="product-item__desc">
+                Meşe Ağacından günde 18 saat bilgisayarda duranlar için özel üretilmiş
+            </p>
+
+            <div class="product-item__footer">
+                <span class="product-item__price">4.000 $</span>
+                <button class="action-btn action-btn--primary">Sepete Ekle</button>
+            </div>
+        </div>
+
+    </article>
+</body>
+
+</html>
