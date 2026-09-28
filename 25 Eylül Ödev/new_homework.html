@@ -1,0 +1,208 @@
+<!--Tarayıcıya bu dosyanın HTML5 standardında olduğunu bildiririz.-->
+<!DOCTYPE html>
+
+<!--Sayfanın HTML etiketini başlatır; lang="tr" ile içeriğin Türkçe olduğunu belirtiriz.-->
+<html lang="tr">
+
+<!--Sayfanın görünmeyen ayarlarının, başlığının ve dış dosya bağlantılarının bulunduğu head bölümünü başlatırız.-->
+<head>
+
+    <!--Türkçe karakterlerin bozulmadan gösterilmesi için UTF-8 kodlamasını kullanırız.-->
+    <meta charset="UTF-8">
+
+    <!--Sayfanın farklı cihazların ekran genişliğine uygun ölçeklenmesini sağlamak için ayar gireriz..-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Tarayıcı sekmesinde görünecek sayfa adını belirtiriz.-->
+    <title>Sipariş & Gelir Kokpit Dashboard</title>
+
+    <!--Harici CSS dosyasını HTML'e bağlarız.-->
+    <link rel="stylesheet" href="new_homework_style.css">
+
+<!--Sayfa ayarlarının bulunduğu head bölümünü bitirmek için bölümü kapatırız.-->
+</head>
+
+<!--Kullanıcının göreceği bütün arayüzün bulunduğu body bölümünü başlatalım.-->
+<body>
+
+    <!--Bütün arayüzü ana kapsayıcıda toplarız.-->
+    <div class="kokpit">
+
+        <!--Sayfanın üst başlık bölümünü header elementiyle ayırdık.-->
+        <header class="header">
+
+            <!--Ana başlığın üstünde küçük bir bölüm etiketi gösterdik.-->
+            <span class="header__tag">Sipariş Takip</span>
+
+            <!--Sayfanın ana başlığını h1 olarak gösterdik.-->
+            <h1 class="header__title">Sipariş Yönetim Kokpiti</h1>
+
+        <!--Üst başlık bölümünü de burada kapatmış olduk.-->
+        </header>
+
+        <!--Sipariş sayısı, toplam tutar ve ortalama fiyat kartlarını aynı bölümde topladık.-->
+        <section class="kpi-grid">
+
+            <!--Tek bir KPI bilgisini gösterecek kart yapısını başlattık.-->
+            <div class="kpi-card">
+
+                <!--İlk KPI değerinin kayıtlı sipariş sayısını gösterdiğini belirttik.-->
+                <span>Kayıtlı sipariş</span>
+
+                <!--Başlangıçta 0 gösteririz; JavaScript ile sonrasında gerçek sipariş sayısını bu id üzerinden güncelleriz.-->
+                <h3 id="kpiCount">0</h3>
+
+            <!--div kapsayıcısını burada kapatalım.-->
+            </div>
+
+            <!--Tek bir KPI bilgisini gösterecek kart yapısını başlattık.-->
+            <div class="kpi-card">
+
+                <!--İkinci KPI değerinin toplam sipariş tutarı olduğunu açıkladık.-->
+                <span>Toplam Sipariş Tutarı</span>
+
+                <!--JavaScript tarafından toplam tutarın yazılacağı alanı oluşturduk.-->
+                <h3 id="kpiTotal">0 ₺</h3>
+
+            <!--div kapsayıcısını burada kapattık.-->
+            </div>
+
+            <!--Tek bir KPI bilgisini gösterecek kart yapısını başlattık.-->
+            <div class="kpi-card">
+
+                <!--Üçüncü KPI değerinin ortalama ürün fiyatı olduğunu belirttik.-->
+                <span>Ortalama Ürün Fiyatı</span>
+
+                <!--Ortalama fiyatın JavaScript tarafından yazılacağı alanı oluşturduk.-->
+                <h3 id="kpiAvg">0 ₺</h3>
+
+            <!--div kapsayıcısını burada kapattık.-->
+            </div>
+
+        <!--Section bölümünü burada kapattık.-->
+        </section>
+
+        <!--Programın asli çalışma alanını başlatıyoruz; form ve sipariş listesini bu bölümde programlayacağız.-->
+        <main class="layout">
+
+            <!--İçeriği "panel" görünümüyle ayrı bir kutu halinde grupladık.-->
+            <section class="panel">
+
+                <!--Sol panelin yeni sipariş ekleme alanı olduğunu kullanıcıya gösteren başlığı verdik.-->
+                <h4>Yeni sipariş kaydı</h4>
+
+                <!--Ürün adı, kategori ve fiyat bilgisini tek form altında topladık; submit işlemi JavaScript tarafından yakalanacaktır.-->
+                <form id="orderForm">
+
+                    <!--Label ile ona ait form kontrolünü aynı grup içinde tuttuk.-->
+                    <div class="field">
+
+                        <!--Ürün adı inputunun etiketidir; for değeri input id'siyle eşleşir.-->
+                        <label for="prodName">Ürün Adı</label>
+
+                        <!--Kullanıcının ürün adını girdiği zorunlu metin alanıdır.-->
+                        <input type="text" id="prodName" placeholder="Sehpa" required>
+
+                    <!--Div kapsayıcısı burada kapanır.-->
+                    </div>
+
+                    <!--Kategori alanını label ve seçim kutusuyla aynı grup içinde tuttuk.-->
+                    <div class="field">
+
+                        <!--Kullanıcının aşağıdaki alanda kategori seçeceğini gösteren etiketi yazdık.-->
+                        <label for="prodCat">Kategori</label>
+
+                        <!--Kategori elle yazılmasın diye hazır seçeneklerin olduğu select kullandık.-->
+                        <select name="prodCat" id="prodCat">
+
+                            <!--Mobilya kategorisini seçeneklere ekledik.-->
+                            <option value="Mobilya">Mobilya</option>
+
+                            <!--Aydınlatma kategorisini de seçimlere dahil ettik.-->
+                            <option value="Aydınlatma">Aydınlatma</option>
+
+                            <!--Son seçenek olarak Mutfak kategorisini verdik.-->
+                            <option value="Mutfak">Mutfak</option>
+
+                        <!--Kategori seçenekleri bittiği için select alanını burada kapatıyoruz.-->
+                        </select>
+
+                    <!--Kategoriye ait field alanını kapattık.-->
+                    </div>
+
+                    <!--Fiyat kısmını da ayrı bir field içerisinde topladık.-->
+                    <div class="field">
+
+                        <!--Aşağıdaki inputun fiyat bilgisi için olduğunu belirttik.-->
+                        <label for="prodPrice">Fiyat</label>
+
+                        <!--Fiyat sayısal olacağı için number kullandık; en az 100 olacak ve değer 50'şer artıp azalabilecek.-->
+                        <input type="number" id="prodPrice" value="3250" min="100" step="50" required>
+
+                    <!--Fiyat alanının bulunduğu div burada bitiyor.-->
+                    </div>
+
+                    <!--Bu butonla formu gönderiyoruz ve sonrasında JavaScript submit olayını yakalıyor.-->
+                    <button type="submit" class="btn-submit">Siparişi Kaydet</button>
+
+                <!--Sipariş eklemek için oluşturduğumuz form burada tamamlanıyor.-->
+                </form>
+
+            <!--Sol taraftaki sipariş ekleme panelini burada kapattık.-->
+            </section>
+
+            <!--Şimdi sağ tarafta siparişleri listeleyeceğimiz ikinci paneli açıyoruz.-->
+            <section class="panel">
+
+                <!--Arama kutusuyla kategori filtresini aynı alan içinde topladık.-->
+                <div class="filter-bar">
+
+                    <!--Kullanıcı ürün adını buraya yazarak listedeki ürünleri filtreleyebilir.-->
+                    <input type="text" id="searchInput" placeholder="Ürün Adına Göre Filtrele">
+
+                    <!--Ürünleri kategoriye göre ayırmak için de ayrı bir select kullandık.-->
+                    <select id="categoryFilter">
+
+                        <!--Tüm ürünleri görmek istediğimizde ALL değerini kullanacağız.-->
+                        <option value="ALL">Tüm Kategoriler</option>
+
+                        <!--Sadece Mobilya ürünlerini görmek için bu seçeneği ekledik.-->
+                        <option value="Mobilya">Mobilya</option>
+
+                        <!--Aydınlatma kategorisi için olan filtre seçeneği.-->
+                        <option value="Aydınlatma">Aydınlatma</option>
+
+                        <!--Mutfak ürünlerini filtrelemek için son seçeneği ekledik.-->
+                        <option value="Mutfak">Mutfak</option>
+
+                    <!--Kategori filtre seçenekleri burada bitiyor.-->
+                    </select>
+
+                <!--Arama ve kategori filtresini tuttuğumuz alanı kapatıyoruz.-->
+                </div>
+
+                <!--Sipariş kartlarını buraya tek tek HTML ile yazmadık; JavaScript oluşturup bu alanın içine ekleyecek.-->
+                <div id="orderContainer" class="order-list">
+
+                    <!--Bu alan başlangıçta boş kalıyor çünkü ürünleri JavaScript sonradan oluşturuyor.-->
+
+                <!--Siparişlerin ekleneceği liste alanını burada kapattık.-->
+                </div>
+
+            <!--Sağ taraftaki sipariş listeleme paneli de burada sona eriyor.-->
+            </section>
+
+        <!--Form ve listeyi içinde tuttuğumuz ana çalışma alanını burada kapatıyoruz.-->
+        </main>
+
+    <!--Sayfanın bütün bölümlerini taşıyan ana kokpit divini kapattık.-->
+    </div>
+
+    <!--JavaScript dosyasını en son çağırdık; böylece script çalışırken yukarıdaki HTML elemanları zaten oluşturulmuş oluyor.-->
+    <script src="new_homework_script.js"></script>
+
+<!--Kullanıcının gördüğü sayfa içeriğinin bulunduğu body burada bitiyor.-->
+</body>
+
+<!--HTML dosyasının tamamını burada kapatmış oluyoruz.-->
+</html>

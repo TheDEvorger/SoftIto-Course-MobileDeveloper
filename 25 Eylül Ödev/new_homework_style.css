@@ -1,0 +1,688 @@
+/* Sayfada birkaç kez kullanacağımız renkleri ve fontları burada değişken olarak topluyoruz. */
+:root {
+
+    /* Sayfanın genel arka planında kullanacağımız açık tonu belirledik. */
+    --bg: #f8f7f4;
+
+    /* Kart ve panellerin zemininde kullanacağımız beyaz renk. */
+    --card: #ffffff;
+
+    /* Kenarlıklarda aynı tonu kullanabilmek için açık gri rengi burada tuttuk. */
+    --border: #e6e5df;
+
+    /* Sayfadaki normal yazıların ana rengini belirliyoruz. */
+    --text: #181716;
+
+    /* Daha geri planda kalmasını istediğimiz yazılar için daha soluk bir renk seçtik. */
+    --muted: #6b6963;
+
+    /* Butonlarda ve dikkat çekmesini istediğimiz yerlerde kullanacağımız ana vurgu rengi. */
+    --clay: #c85a32;
+
+    /* Butonun üzerine gelindiğinde ana rengin biraz daha koyu halini kullanacağız. */
+    --clay-hover: #b04e29;
+
+    /* Sayfanın genelinde kullanılacak ana yazı tipi ailesini burada tanımladık. */
+    --font-main: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Sayısal alanlarda kullanmak için ayrı bir monospace font belirledik. */
+    --font-mono: 'JetBrains Mono', monospace;
+
+/* Root içerisinde tanımlayacağımız değişkenler bittiği için bloğu kapatıyoruz. */
+}
+
+
+/* Bütün elementleri seçip tarayıcının verdiği varsayılan boşlukları baştan düzenliyoruz. */
+* {
+
+    /* Padding ve border değerlerinin elementin toplam genişliğini büyütmemesi için border-box kullandık. */
+    box-sizing: border-box;
+
+    /* Tarayıcının elementlere kendiliğinden verdiği dış boşlukları kaldırıyoruz. */
+    margin: 0;
+
+    /* Aynı şekilde varsayılan iç boşlukları da sıfırlıyoruz. */
+    padding: 0;
+
+/* Genel sıfırlama ayarlarımız burada bitiyor. */
+}
+
+
+/* Sayfanın tamamına etki edecek temel görünüm ayarları. */
+body {
+
+    /* Arka planı daha önce --bg değişkenine verdiğimiz renkten alıyoruz. */
+    background: var(--bg);
+
+    /* Normal metinlerde kullanılacak rengi --text değişkeninden çağırıyoruz. */
+    color: var(--text);
+
+    /* Sayfanın ana fontunu burada veriyoruz, alt elemanların çoğu bunu kullanacak. */
+    font-family: var(--font-main);
+
+    /* İçeriğin ekran kenarlarına yapışmaması için üst-alt ve sağ-sol boşluk bıraktık. */
+    padding: 36px 16px;
+
+    /* Metin satırlarının biraz daha rahat okunması için satır aralığını artırıyoruz. */
+    line-height: 1.5;
+
+/* Body için belirlediğimiz genel ayarlar burada tamamlanıyor. */
+}
+
+
+/* Bütün arayüzü taşıyan ana kokpit alanının genişliğini burada kontrol ediyoruz. */
+.kokpit {
+
+    /* Büyük ekranlarda içeriğin gereğinden fazla yayılmasını 960px ile sınırlıyoruz. */
+    max-width: 960px;
+
+    /* Sağ ve sol boşluğu auto yaparak kokpit alanını sayfanın ortasına getiriyoruz. */
+    margin: 0 auto;
+
+/* Ana kokpit alanının ayarlarını burada kapattık. */
+}
+
+
+/* Sayfanın en üstündeki başlık bölümünün görünümünü düzenliyoruz. */
+.header {
+
+    /* Header ile hemen altındaki KPI kartları arasında biraz mesafe bırakıyoruz. */
+    margin-bottom: 24px;
+
+    /* Alt çizginin başlık yazısına fazla yaklaşmaması için iç boşluk verdik. */
+    padding-bottom: 16px;
+
+    /* Başlık bölümünü aşağıdaki içerikten ince bir çizgiyle ayırıyoruz. */
+    border-bottom: 1px solid var(--border);
+
+/* Header bölümüne ait stil ayarları burada bitiyor. */
+}
+
+
+/* Ana başlığın üstünde duran küçük "Sipariş Takip" yazısını düzenliyoruz. */
+.header__tag {
+
+    /* Yardımcı bir yazı olduğu için boyutunu küçük tuttuk. */
+    font-size: 11px;
+
+    /* HTML'de nasıl yazılırsa yazılsın ekranda büyük harfle görünmesini sağlıyoruz. */
+    text-transform: uppercase;
+
+    /* Küçük başlığın harflerini biraz açarak daha rahat görünmesini sağladık. */
+    letter-spacing: 0.12em;
+
+    /* Bu yazıda sayfanın vurgu rengini kullanıyoruz. */
+    color: var(--clay);
+
+    /* Boyutu küçük olduğu için okunurluğunu korumak adına biraz kalınlaştırdık. */
+    font-weight: 700;
+
+/* Küçük header etiketi için verdiğimiz ayarlar burada tamamlanıyor. */
+}
+
+
+/* Sayfanın ana başlığını düzenlediğimiz bölüm. */
+.header__title {
+
+    /* Ana başlık olduğu için diğer metinlerden daha büyük gösteriyoruz. */
+    font-size: 26px;
+
+    /* Başlığın daha belirgin olması için kalın bir değer kullandık. */
+    font-weight: 700;
+
+    /* Üstündeki küçük etiketle tamamen birleşmemesi için 2px boşluk bırakıyoruz. */
+    margin-top: 2px;
+
+/* Ana başlık ayarlarını burada bitiriyoruz. */
+}
+
+
+/* Üst taraftaki üç KPI kartının yerleşimini bu alanda düzenliyoruz. */
+.kpi-grid {
+
+    /* Kartları düzenli şekilde sütunlara ayırabilmek için Grid kullanıyoruz. */
+    display: grid;
+
+    /* Alanı birbirine eşit üç sütuna bölerek üç KPI kartını yan yana getiriyoruz. */
+    grid-template-columns: repeat(3, 1fr);
+
+    /* Kartların birbirine yapışmaması için aralarında 14px mesafe bırakıyoruz. */
+    gap: 14px;
+
+    /* KPI alanıyla alttaki ana içerik arasında biraz boşluk oluşturduk. */
+    margin-bottom: 24px;
+
+/* KPI kartlarının grid düzeni burada tamamlanıyor. */
+}
+
+
+/* Tek tek KPI kartlarının ortak görünümünü belirliyoruz. */
+.kpi-card {
+
+    /* Kartları ana sayfa zemininden ayırmak için beyaz arka plan kullanıyoruz. */
+    background: var(--card);
+
+    /* Kartın sınırını belli etmek için ince bir kenarlık ekledik. */
+    border: 1px solid var(--border);
+
+    /* Köşeleri 8px yuvarlayarak kartın daha yumuşak görünmesini sağlıyoruz. */
+    border-radius: 8px;
+
+    /* Kart içindeki yazıların kenarlara yapışmaması için iç boşluk bırakıyoruz. */
+    padding: 14px 18px;
+
+/* KPI kartının genel kutu görünümü burada bitiyor. */
+}
+
+
+/* KPI kartlarında sayının üstünde bulunan açıklama yazılarını düzenliyoruz. */
+.kpi-card span {
+
+    /* Yardımcı bilgi olduğu için yazıyı 12px olarak tuttuk. */
+    font-size: 12px;
+
+    /* Asıl KPI değerinden daha geri planda kalması için soluk rengi kullanıyoruz. */
+    color: var(--muted);
+
+    /* Küçük yazının fazla ince görünmemesi için ağırlığını 600 yaptık. */
+    font-weight: 600;
+
+/* KPI açıklama yazılarının stilleri burada tamamlandı. */
+}
+
+
+/* KPI kartlarında gösterilen asıl sayısal değerleri düzenliyoruz. */
+.kpi-card h3 {
+
+    /* Sayıların açıklama metninden daha fazla öne çıkması için boyutunu büyüttük. */
+    font-size: 22px;
+
+    /* Değerleri daha rahat fark edebilmek için kalın gösteriyoruz. */
+    font-weight: 700;
+
+    /* Sayısal değerlerde daha düzenli bir görünüm için monospace font kullanıyoruz. */
+    font-family: var(--font-mono);
+
+    /* Üstteki küçük açıklamayla sayı arasında az miktarda boşluk bırakıyoruz. */
+    margin-top: 4px;
+
+/* KPI değerlerine ait görünüm ayarları burada bitiyor. */
+}
+
+
+/* Form ile sipariş listesini yan yana yerleştireceğimiz ana düzen alanı. */
+.layout {
+
+    /* Sol ve sağ tarafı sütun şeklinde kontrol edebilmek için Grid kullandık. */
+    display: grid;
+
+    /* Sol paneli 320px tuttuk, sağ panel kalan boş alanı kullanıyor. */
+    grid-template-columns: 320px 1fr;
+
+    /* İki panelin birbirine yapışmaması için araya 24px bırakıyoruz. */
+    gap: 24px;
+
+/* Masaüstündeki ana yerleşim düzeni burada tamamlanıyor. */
+}
+
+
+/* Ekran 768px veya altına indiğinde mobil görünüm için bu kuralları çalıştırıyoruz. */
+@media (max-width: 768px) {
+
+    /* Hem ana içerik düzenini hem KPI kartlarını aynı responsive kurala dahil ediyoruz. */
+    .layout,
+
+    /* KPI grid'i de aşağıdaki tek sütun ayarından yararlanacak. */
+    .kpi-grid {
+
+        /* Dar ekranda sütunları teke indirerek kart ve panelleri alt alta getiriyoruz. */
+        grid-template-columns: 1fr;
+
+    /* Mobilde tek sütuna çevirdiğimiz grid alanını burada kapatıyoruz. */
+    }
+
+/* 768px ve altındaki ekranlara ait responsive bölüm burada bitiyor. */
+}
+
+
+/* Form ve sipariş listesinde kullandığımız panellerin ortak kutu görünümü. */
+.panel {
+
+    /* Panel zemininde daha önce tanımladığımız beyaz kart rengini kullanıyoruz. */
+    background: var(--card);
+
+    /* Panelin dış sınırını hafifçe belli etmek için ince border ekledik. */
+    border: 1px solid var(--border);
+
+    /* Panel köşelerini 10px yuvarlatarak keskin görünümü azaltıyoruz. */
+    border-radius: 10px;
+
+    /* Panelin içindeki elemanların kenarlara dayanmaması için 20px boşluk bırakıyoruz. */
+    padding: 20px;
+
+/* Panel kutusuna ait ortak ayarları burada bitiriyoruz. */
+}
+
+
+/* Panellerin içinde kullandığımız h4 başlıkların görünümü. */
+.panel h4 {
+
+    /* Panel başlığını normal metinden ayırmak için 15px boyut verdik. */
+    font-size: 15px;
+
+    /* Bölüm başlığının belirgin olması için kalınlığını artırıyoruz. */
+    font-weight: 700;
+
+    /* Başlık ile altında başlayan içerik arasında mesafe bırakıyoruz. */
+    margin-bottom: 14px;
+
+    /* Başlığın altındaki çizgi yazıya fazla yaklaşmasın diye iç boşluk koyduk. */
+    padding-bottom: 8px;
+
+    /* Başlığın bittiği yeri göstermek için altına ince bir çizgi ekliyoruz. */
+    border-bottom: 1px solid var(--border);
+
+/* Panel başlıklarının görünümü burada tamamlanıyor. */
+}
+
+
+/* Formdaki her label ve input grubunu birbirinden ayırmak için field alanını kullanıyoruz. */
+.field {
+
+    /* Bir sonraki form alanıyla arasında 12px mesafe bırakıyoruz. */
+    margin-bottom: 12px;
+
+/* Field için gereken tek boşluk ayarı burada bitiyor. */
+}
+
+
+/* Form alanlarının üstünde bulunan label yazılarını düzenliyoruz. */
+.field label {
+
+    /* Label'ın input ile aynı satırda kalmaması için block olarak gösteriyoruz. */
+    display: block;
+
+    /* Form etiketi olduğu için yazı boyutunu 12px tuttuk. */
+    font-size: 12px;
+
+    /* Input isimlerinin biraz daha belirgin olması için 600 kalınlık kullanıyoruz. */
+    font-weight: 600;
+
+    /* Label ile hemen altındaki input arasında küçük bir boşluk bırakıyoruz. */
+    margin-bottom: 4px;
+
+/* Label görünümüne ait ayarlar burada tamamlandı. */
+}
+
+
+/* Formdaki input ve select elemanlarına aynı temel görünümü vermek istiyoruz. */
+.field input,
+
+/* Select de input ile beraber aşağıdaki ortak stil bloğunu kullanacak. */
+.field select {
+
+    /* Form kontrollerini panel içinde mümkün olan genişliğin tamamına yayıyoruz. */
+    width: 100%;
+
+    /* Yazının kutunun kenarına yapışmaması için iç boşluk bırakıyoruz. */
+    padding: 8px 10px;
+
+    /* Form içindeki yazıları 13px boyutunda gösteriyoruz. */
+    font-size: 13px;
+
+    /* Form elemanlarının sayfanın ana fontunu kullanmasını sağlıyoruz. */
+    font-family: inherit;
+
+    /* Inputları beyaz panelden hafif ayırmak için sayfanın arka plan tonunu kullanıyoruz. */
+    background: var(--bg);
+
+    /* Form alanlarının çevresine hafif bir çerçeve çiziyoruz. */
+    border: 1px solid var(--border);
+
+    /* Köşeleri 6px yuvarlatarak form kutularını biraz daha yumuşak gösteriyoruz. */
+    border-radius: 6px;
+
+/* Input ve select için verdiğimiz ortak görünüm burada bitiyor. */
+}
+
+
+/* Kullanıcı input alanına geldiğinde uygulanacak focus görünümünü başlatıyoruz. */
+.field input:focus,
+
+/* Select seçildiğinde de aynı focus kuralları geçerli olacak. */
+.field select:focus {
+
+    /* Tarayıcının kendi varsayılan focus çizgisini kaldırıyoruz. */
+    outline: none;
+
+    /* Aktif olan form alanının kenarlığını vurgu rengine çeviriyoruz. */
+    border-color: var(--clay);
+
+    /* Focus durumunda alanın zeminini beyaz yaparak biraz daha belirgin hale getiriyoruz. */
+    background: #fff;
+
+/* Form alanlarının focus görünümü burada sona eriyor. */
+}
+
+
+/* Siparişi kaydetmek için kullandığımız ana butonun görünümü. */
+.btn-submit {
+
+    /* Butonun form alanının tamamını kaplamasını sağlıyoruz. */
+    width: 100%;
+
+    /* Arka planda sayfanın ana vurgu rengini kullanıyoruz. */
+    background: var(--clay);
+
+    /* Koyu buton zemini üzerinde yazıyı beyaz gösteriyoruz. */
+    color: #fff;
+
+    /* Tarayıcının varsayılan buton kenarlığını kaldırıyoruz. */
+    border: none;
+
+    /* Buton içeriğinin rahat görünmesi ve tıklanması için iç boşluk ekliyoruz. */
+    padding: 10px;
+
+    /* Buton üzerindeki yazının boyutunu 13px olarak belirledik. */
+    font-size: 13px;
+
+    /* Buton yazısını normal metinden biraz daha kalın gösteriyoruz. */
+    font-weight: 600;
+
+    /* Butonun köşelerini 6px yuvarlatıyoruz. */
+    border-radius: 6px;
+
+    /* Fare üzerine geldiğinde el işaretine geçerek butonun tıklanabilir olduğunu belli ediyoruz. */
+    cursor: pointer;
+
+    /* Fiyat alanıyla buton arasında küçük bir boşluk bırakıyoruz. */
+    margin-top: 6px;
+
+/* Kaydet butonunun normal görünümü burada tamamlanıyor. */
+}
+
+
+/* Fare kaydet butonunun üzerine geldiğinde uygulanacak görünüm. */
+.btn-submit:hover {
+
+    /* Hover sırasında rengi biraz koyulaştırarak kullanıcıya görsel geri bildirim veriyoruz. */
+    background: var(--clay-hover);
+
+/* Kaydet butonunun hover ayarı burada bitiyor. */
+}
+
+
+/* Arama kutusu ile kategori filtresinin bulunduğu üst alanı düzenliyoruz. */
+.filter-bar {
+
+    /* İki filtre elemanını aynı satırda göstermek için flex yapısını kullanıyoruz. */
+    display: flex;
+
+    /* Arama kutusu ile kategori select'i arasına 10px boşluk koyuyoruz. */
+    gap: 10px;
+
+    /* Filtre alanıyla altındaki sipariş kartları arasına biraz mesafe bırakıyoruz. */
+    margin-bottom: 14px;
+
+/* Filtre çubuğunun yerleşimi burada tamamlandı. */
+}
+
+
+/* Ürün adına göre arama yaptığımız inputun kendine özel ayarları. */
+#searchInput {
+
+    /* Kategori filtresinden kalan yatay alanın tamamını arama kutusunun kullanmasını sağlıyoruz. */
+    flex: 1;
+
+    /* Yazının input kenarlarına yapışmaması için iç boşluk verdik. */
+    padding: 8px 10px;
+
+    /* Arama kutusundaki yazının boyutunu 13px yapıyoruz. */
+    font-size: 13px;
+
+    /* Inputun çevresini diğer form elemanlarıyla aynı çizgiyle belirliyoruz. */
+    border: 1px solid var(--border);
+
+    /* Köşeleri 6px yuvarlayarak diğer form alanlarıyla uyumlu hale getiriyoruz. */
+    border-radius: 6px;
+
+/* Arama inputuna ait özel görünüm burada tamamlandı. */
+}
+
+
+/* Sağ taraftaki kategori filtresinin ölçü ve görünüm ayarları. */
+#categoryFilter {
+
+    /* Arama kutusunun yanında fazla alan kaplamaması için genişliği 130px yaptık. */
+    width: 130px;
+
+    /* Seçenek yazılarını 12px boyutunda gösteriyoruz. */
+    font-size: 12px;
+
+    /* Select içindeki yazının kenarlara dayanmaması için 6px boşluk veriyoruz. */
+    padding: 6px;
+
+    /* Filtrenin çevresine diğer kontrollerle uyumlu ince bir çizgi ekliyoruz. */
+    border: 1px solid var(--border);
+
+    /* Select kutusunun köşelerini 6px yuvarlatıyoruz. */
+    border-radius: 6px;
+
+/* Kategori filtresinin görünümü burada bitiyor. */
+}
+
+
+/* Sipariş kartlarının yer aldığı listenin düzenini belirliyoruz. */
+.order-list {
+
+    /* Kartların yerleşimini flex yapısıyla kontrol ediyoruz. */
+    display: flex;
+
+    /* Kartları yan yana değil yukarıdan aşağıya doğru sıralıyoruz. */
+    flex-direction: column;
+
+    /* Her sipariş kartının arasında 10px mesafe bırakıyoruz. */
+    gap: 10px;
+
+/* Sipariş listesinin yerleşim ayarları burada tamamlandı. */
+}
+
+
+/* JavaScript ile oluşturduğumuz tek bir sipariş kartının görünümü. */
+.order-item {
+
+    /* Kartın panelden biraz ayrılması için sayfanın açık arka plan tonunu kullanıyoruz. */
+    background: var(--bg);
+
+    /* Kartın sınırlarını belli edecek ince bir çerçeve ekliyoruz. */
+    border: 1px solid var(--border);
+
+    /* Kartın köşelerini 6px yuvarlatarak keskinliği azaltıyoruz. */
+    border-radius: 6px;
+
+    /* Kart içeriğiyle kenarlar arasında yeterli boşluk bırakıyoruz. */
+    padding: 12px 14px;
+
+    /* Ürün bilgileri ile sağ taraftaki kategori ve silme alanını yan yana getiriyoruz. */
+    display: flex;
+
+    /* Sol ve sağ bölümü kartın iki ucuna dağıtıyoruz. */
+    justify-content: space-between;
+
+    /* İki tarafın dikey olarak aynı hizada görünmesini sağlıyoruz. */
+    align-items: center;
+
+/* Tek sipariş kartının genel düzeni burada bitiyor. */
+}
+
+
+/* Sipariş kartının içinde gösterilen ürün adının görünümü. */
+.order-item h5 {
+
+    /* Ürün adını 13px boyutunda gösteriyoruz. */
+    font-size: 13px;
+
+    /* Fiyattan biraz daha belirgin olması için yazıyı 600 kalınlıkta tutuyoruz. */
+    font-weight: 600;
+
+/* Ürün adına ait ayarlar burada tamamlandı. */
+}
+
+
+/* Ürün kartındaki fiyat bilgisini düzenliyoruz. */
+.order-item p {
+
+    /* Fiyat yazısını ürün adından biraz daha küçük gösteriyoruz. */
+    font-size: 12px;
+
+    /* İkinci plandaki bilgi olduğu için daha soluk yazı rengini kullanıyoruz. */
+    color: var(--muted);
+
+/* Fiyat metninin görünümü burada bitiyor. */
+}
+
+
+/* Kategori rozeti ile Sil butonunu taşıyan sağ alan. */
+.meta-box {
+
+    /* Rozet ve butonu aynı satıra almak için flex kullanıyoruz. */
+    display: flex;
+
+    /* İki elemanı dikey olarak ortalıyoruz. */
+    align-items: center;
+
+    /* Kategori rozeti ile buton arasına 10px boşluk bırakıyoruz. */
+    gap: 10px;
+
+/* Kartın sağ tarafındaki meta alanını burada kapatıyoruz. */
+}
+
+
+/* Bütün kategori rozetlerinde ortak kullanılacak temel görünüm. */
+.badge {
+
+    /* Küçük bir etiket olduğu için yazı boyutunu 11px yaptık. */
+    font-size: 11px;
+
+    /* Yazıyla rozet kenarları arasında küçük bir boşluk bırakıyoruz. */
+    padding: 2px 7px;
+
+    /* Köşeleri 4px yuvarlayarak rozete küçük bir etiket görünümü veriyoruz. */
+    border-radius: 4px;
+
+    /* Küçük yazının daha rahat okunması için kalınlığı 600 yapıyoruz. */
+    font-weight: 600;
+
+    /* Kategoriye özel renk gelmezse kullanılacak varsayılan zemin rengini veriyoruz. */
+    background: #fef3c7;
+
+    /* Varsayılan rozet yazı rengini burada belirliyoruz. */
+    color: #92400e;
+
+    /* Rozetlerde daha teknik bir görünüm için mono fontu kullanıyoruz. */
+    font-family: var(--font-mono);
+
+/* Bütün rozetlerin kullandığı ortak ayarlar burada tamamlandı. */
+}
+
+
+/* Mobilya kategorisindeki rozetlerin renklerini ayrıca belirliyoruz. */
+.badge--mobilya {
+
+    /* Mobilya rozeti için açık mavi bir zemin kullanıyoruz. */
+    background: #e0e7ff;
+
+    /* Açık zeminde okunması için yazıyı koyu mavi yaptık. */
+    color: #3730a3;
+
+/* Mobilya kategorisine özel renk ayarları burada bitiyor. */
+}
+
+
+/* Aydınlatma kategorisi geldiğinde kullanılacak renkler. */
+.badge--aydinlatma {
+
+    /* Rozetin zeminini açık sarı tonunda gösteriyoruz. */
+    background: #fef3c7;
+
+    /* Sarı zemin üzerinde daha koyu sıcak bir yazı rengi seçtik. */
+    color: #b45309;
+
+/* Aydınlatma rozetine ait renkler burada tamamlandı. */
+}
+
+
+/* Mutfak ürünlerini diğer kategorilerden ayıracak rozet renkleri. */
+.badge--mutfak {
+
+    /* Mutfak kategorisi için açık yeşil zemin kullandık. */
+    background: #d1fae5;
+
+    /* Açık yeşil zemin üzerinde koyu yeşil yazı gösteriyoruz. */
+    color: #065f46;
+
+/* Mutfak rozeti için verilen ayarlar burada sona eriyor. */
+}
+
+
+/* Her sipariş kartında bulunan Sil butonunun normal görünümü. */
+.btn-del {
+
+    /* Normal durumda butonun arka planını şeffaf bırakıyoruz. */
+    background: transparent;
+
+    /* Butonu belli etmek için çevresine ince bir çizgi ekliyoruz. */
+    border: 1px solid var(--border);
+
+    /* Sil butonu sürekli dikkat çekmesin diye başlangıçta soluk yazı rengi kullanıyoruz. */
+    color: var(--muted);
+
+    /* Küçük yardımcı buton olduğu için yazıyı 11px tutuyoruz. */
+    font-size: 11px;
+
+    /* Butonun hem rahat görünmesi hem de kolay tıklanması için iç boşluk veriyoruz. */
+    padding: 4px 8px;
+
+    /* Köşeleri 4px yuvarlatarak diğer küçük elemanlarla uyumlu hale getiriyoruz. */
+    border-radius: 4px;
+
+    /* Üzerine gelindiğinde el imlecini göstererek tıklanabilir olduğunu belirtiyoruz. */
+    cursor: pointer;
+
+/* Sil butonunun normal görünüm ayarları burada tamamlanıyor. */
+}
+
+
+/* Fare Sil butonunun üzerine geldiğinde renklerini değiştiriyoruz. */
+.btn-del:hover {
+
+    /* Silme işlemini belli etmek için hover durumunda kırmızı arka plan kullanıyoruz. */
+    background: #ef4444;
+
+    /* Kırmızı zeminde okunabilmesi için yazıyı beyaza çeviriyoruz. */
+    color: #fff;
+
+    /* Butonun kenarlığını da arka planla aynı kırmızı tona getiriyoruz. */
+    border-color: #ef4444;
+
+/* Sil butonunun hover görünümü burada bitiyor. */
+}
+
+
+/* Filtreleme sonucunda hiçbir ürün bulunmadığında gösterilecek mesaj alanı. */
+.empty-state {
+
+    /* Mesajın bulunduğu alan çok sıkışık görünmesin diye 24px iç boşluk bırakıyoruz. */
+    padding: 24px;
+
+    /* Boş sonuç mesajını alanın ortasında gösteriyoruz. */
+    text-align: center;
+
+    /* Ana içerikten daha geri planda kalması için soluk yazı rengini kullanıyoruz. */
+    color: var(--muted);
+
+    /* Bilgilendirme yazısını 12px boyutunda gösteriyoruz. */
+    font-size: 12px;
+
+/* Boş sonuç mesajına ait görünüm ayarlarını burada tamamlıyoruz. */
+}
