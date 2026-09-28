@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIONDRIS | Instruments for a Deeper World</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="header">
+
+    <a class="logo" href="#home">
+      <span class="logo__symbol">✦</span>
+      VIONDRIS
+    </a>
+
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#instruments">Instruments</a>
+      <a href="#brands">Brands</a>
+      <a href="#categories">Categories</a>
+      <a href="#workshop">Workshop</a>
+      <a href="#cart">Cart</a>
+    </nav>
+
+    <div class="header__actions">
+
+      <input
+        id="headerSearch"
+        class="header__search"
+        type="search"
+        placeholder="Search instruments..."
+      >
+
+      <a class="cart-link" href="#cart">
+        Cart
+        <span id="cartBadge">0</span>
+      </a>
+
+    </div>
+
+  </header>
+
+  <main>
+
+    <section id="home" class="hero">
+
+      <div class="hero__content">
+
+        <p class="section-label">HANDCRAFTED SOUND</p>
+
+        <h1>
+          Instruments for
+          <span>a Deeper World</span>
+        </h1>
+
+        <p class="hero__description">
+          Discover extraordinary instruments shaped by wood,
+          metal, breath and imagination.
+        </p>
+
+        <a class="button button--primary" href="#instruments">
+          Explore Instruments
+        </a>
+
+      </div>
+
+      <div class="hero__features">
+
+        <div>
+          <span>✦</span>
+          <p>Handcrafted Instruments</p>
+        </div>
+
+        <div>
+          <span>◈</span>
+          <p>Independent Brands</p>
+        </div>
+
+        <div>
+          <span>⌁</span>
+          <p>Original Sound Design</p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="stats">
+
+      <article class="stat-card">
+        <span class="stat-card__icon">◉</span>
+        <strong id="statInstruments">0</strong>
+        <p>Instruments</p>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-card__icon">✦</span>
+        <strong id="statBrands">0</strong>
+        <p>Brands</p>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-card__icon">◇</span>
+        <strong id="statStock">0</strong>
+        <p>Total Stock</p>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-card__icon">⌁</span>
+        <strong id="statAverage">$0</strong>
+        <p>Average Price</p>
+      </article>
+
+    </section>
+
+    <p id="stockStatus" class="stock-status"></p>
+
+    <section id="categories" class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <p class="section-label">EXPLORE BY CATEGORY</p>
+          <h2>Instruments for Every Journey</h2>
+        </div>
+
+        <p>
+          Explore the VIONDRIS collection through
+          different families of sound.
+        </p>
+
+      </div>
+
+      <div class="category-grid">
+
+        <button id="categoryStrings" class="category-card" type="button">
+          <img src="./Assets/category-strings.png" alt="Strings category">
+        </button>
+
+        <button id="categoryWind" class="category-card" type="button">
+          <img src="./Assets/category-wind.png" alt="Wind category">
+        </button>
+
+        <button id="categoryHybrid" class="category-card" type="button">
+          <img src="./Assets/category-hybrid.png" alt="Hybrid instruments">
+        </button>
+
+        <button id="categoryAcoustic" class="category-card" type="button">
+          <img src="./Assets/category-acoustic.png" alt="Acoustic instruments">
+        </button>
+
+      </div>
+
+    </section>
+
+    <section id="brands" class="section section--dark">
+
+      <div class="section-heading section-heading--light">
+
+        <div>
+          <p class="section-label">VIONDRIS MAKERS</p>
+          <h2>Four Houses of Sound</h2>
+        </div>
+
+        <p>
+          Each house follows its own philosophy of
+          craftsmanship and sound.
+        </p>
+
+      </div>
+
+      <div class="brand-grid">
+
+        <button class="brand-card" value="STRUNOVA" type="button">
+          <span>01</span>
+          <h3>STRUNOVA</h3>
+          <p>
+            Elegant string instruments shaped from
+            wood, bronze and resonance.
+          </p>
+          <strong>Explore →</strong>
+        </button>
+
+        <button class="brand-card" value="VELTRUNE" type="button">
+          <span>02</span>
+          <h3>VELTRUNE</h3>
+          <p>
+            Instruments built around air, breath,
+            movement and organic form.
+          </p>
+          <strong>Explore →</strong>
+        </button>
+
+        <button class="brand-card" value="ARQENZA" type="button">
+          <span>03</span>
+          <h3>ARQENZA</h3>
+          <p>
+            Monumental acoustic craftsmanship for
+            concert-grade instruments.
+          </p>
+          <strong>Explore →</strong>
+        </button>
+
+        <button class="brand-card" value="LYRAVEX" type="button">
+          <span>04</span>
+          <h3>LYRAVEX</h3>
+          <p>
+            Experimental instruments where acoustic
+            craft meets modern engineering.
+          </p>
+          <strong>Explore →</strong>
+        </button>
+
+      </div>
+
+    </section>
+
+    <section id="instruments" class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <p class="section-label">THE COLLECTION</p>
+          <h2>Featured Instruments</h2>
+        </div>
+
+        <p>
+          Search, filter and discover instruments
+          from every VIONDRIS house.
+        </p>
+
+      </div>
+
+      <div class="filters">
+
+        <input id="searchInput" type="search" placeholder="Search by instrument name...">
+
+        <select id="brandFilter">
+          <option value="All">All Brands</option>
+          <option value="STRUNOVA">STRUNOVA</option>
+          <option value="VELTRUNE">VELTRUNE</option>
+          <option value="ARQENZA">ARQENZA</option>
+          <option value="LYRAVEX">LYRAVEX</option>
+        </select>
+
+        <select id="categoryFilter">
+          <option value="All">All Categories</option>
+          <option value="Strings">Strings</option>
+          <option value="Wind">Wind</option>
+          <option value="Percussion">Percussion</option>
+          <option value="Keyboard">Keyboard</option>
+          <option value="Experimental">Experimental</option>
+        </select>
+
+        <select id="systemFilter">
+          <option value="All">All Systems</option>
+          <option value="Acoustic">Acoustic</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="Electric">Electric</option>
+        </select>
+
+        <button id="resetFilters" class="button button--secondary" type="button">
+          Reset
+        </button>
+
+      </div>
+
+      <div id="productGrid" class="product-grid"></div>
+
+    </section>
+
+    <section id="workshop" class="section workshop">
+
+      <div class="section-heading">
+
+        <div>
+          <p class="section-label">THE WORKSHOP</p>
+          <h2>Add a New Instrument</h2>
+        </div>
+
+        <p>
+          Create a new instrument and add it
+          directly to the VIONDRIS collection.
+        </p>
+
+      </div>
+
+      <form id="productForm" class="product-form">
+
+        <div class="form-field">
+          <label for="productName">Instrument Name</label>
+          <input id="productName" type="text" required>
+        </div>
+
+        <div class="form-field">
+          <label for="productBrand">Brand</label>
+          <select id="productBrand" required>
+            <option value="STRUNOVA">STRUNOVA</option>
+            <option value="VELTRUNE">VELTRUNE</option>
+            <option value="ARQENZA">ARQENZA</option>
+            <option value="LYRAVEX">LYRAVEX</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="productCategory">Category</label>
+          <select id="productCategory" required>
+            <option value="Strings">Strings</option>
+            <option value="Wind">Wind</option>
+            <option value="Percussion">Percussion</option>
+            <option value="Keyboard">Keyboard</option>
+            <option value="Experimental">Experimental</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="productSystem">System</label>
+          <select id="productSystem" required>
+            <option value="Acoustic">Acoustic</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Electric">Electric</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="productPrice">Price ($)</label>
+          <input id="productPrice" type="number" min="1" required>
+        </div>
+
+        <div class="form-field">
+          <label for="productStock">Stock</label>
+          <input id="productStock" type="number" min="0" required>
+        </div>
+
+        <div class="form-field form-field--wide">
+          <label for="productImage">Image Path</label>
+          <input id="productImage" type="text" placeholder="./Assets/example.png" required>
+        </div>
+
+        <button class="button button--primary form-submit" type="submit">
+          Add Instrument
+        </button>
+
+        <p id="formMessage" class="form-message"></p>
+
+      </form>
+
+    </section>
+
+    <section id="cart" class="section cart-section">
+
+      <div class="section-heading">
+
+        <div>
+          <p class="section-label">YOUR SELECTION</p>
+          <h2>Cart</h2>
+        </div>
+
+        <p>
+          Instruments selected from the
+          VIONDRIS collection.
+        </p>
+
+      </div>
+
+      <div id="cartList" class="cart-list"></div>
+
+      <div class="cart-summary">
+
+        <div>
+          <span>Items</span>
+          <strong id="cartItemCount">0</strong>
+        </div>
+
+        <div>
+          <span>Total</span>
+          <strong id="cartTotal">$0</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">
+
+    <div class="footer__top">
+
+        <div class="footer__brand">
+        <a class="logo" href="#home">
+            <span class="logo__symbol">✦</span>
+            VIONDRIS
+        </a>
+
+        <p>Instruments for a Deeper World.</p>
+        </div>
+
+        <div class="footer__houses">
+        <span>STRUNOVA</span>
+        <span>VELTRUNE</span>
+        <span>ARQENZA</span>
+        <span>LYRAVEX</span>
+        </div>
+
+    </div>
+
+    <div class="footer__bottom">
+
+        <p class="footer__legal">
+        © 2026 VIONDRIS. All rights reserved. The VIONDRIS name, STRUNOVA,
+        VELTRUNE, ARQENZA, LYRAVEX, fictional instrument models, original
+        product concepts, visual identities, interface design and written
+        content featured on this website were created as part of an educational
+        and portfolio project. No part of this website may be copied,
+        reproduced, redistributed, modified or used for commercial purposes
+        without prior permission. All fictional names and concepts are presented
+        solely for demonstration, design and educational purposes.
+        </p>
+
+    </div>
+
+</footer>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
