@@ -68,11 +68,9 @@ void main() {
     print("Aksiyon: Otomatik Aws Açma isteği Gönderildi");
   } on Cloud catch (e) {
     print("Bulut hatası: ${e.mesaj}");
-  } catch (e, stackTrace) {
+  } catch (e) {
     print("Bilinmedik Sistem Hatasi $e");
   } finally {
     print("Pod tahsis günlüğü kapatıldı.");
   }
-
-  
 }
