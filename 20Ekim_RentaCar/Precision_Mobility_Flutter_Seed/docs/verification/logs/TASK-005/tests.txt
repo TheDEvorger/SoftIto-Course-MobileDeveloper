@@ -1,0 +1,8 @@
+00:00 +0: loading /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/booking_ledger_test.dart
+00:00 +0: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/booking_ledger_test.dart: quote amount rounds partial days up, expiry boundary fails closed
+00:00 +1: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/booking_ledger_test.dart: invalid IDs, rates and dates rejected
+00:00 +2: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/booking_ledger_test.dart: confirmed overlap rejected including enclosing/contained intervals
+00:00 +3: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/booking_ledger_test.dart: adjacent slots and separate vehicles do not conflict
+00:00 +4: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/booking_ledger_test.dart: cancellation releases allocation, terminal transitions rejected
+00:00 +5: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/booking_flow_test.dart: details quote confirm and cancel demo
+00:01 +6: All tests passed!

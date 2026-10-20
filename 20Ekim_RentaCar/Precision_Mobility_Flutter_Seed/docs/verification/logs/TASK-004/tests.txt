@@ -1,0 +1,5 @@
+00:00 +0: loading /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/vehicle_details_test.dart
+00:00 +0: fixtures have unique IDs and complete attributes
+00:00 +1: card opens details and back preserves search
+00:01 +2: missing vehicle shows recoverable empty state
+00:01 +3: All tests passed!

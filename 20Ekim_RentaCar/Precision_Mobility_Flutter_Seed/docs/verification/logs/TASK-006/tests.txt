@@ -1,0 +1,6 @@
+00:00 +0: loading /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/handover_test.dart
+00:00 +0: HandoverMode.physical blocks every missing prerequisite and inspection
+00:00 +1: HandoverMode.digital blocks every missing prerequisite and inspection
+00:00 +2: digital compatibility, negative response and uncertainty fail closed
+00:00 +3: demo screen exposes errors without claiming trip start
+00:01 +4: All tests passed!

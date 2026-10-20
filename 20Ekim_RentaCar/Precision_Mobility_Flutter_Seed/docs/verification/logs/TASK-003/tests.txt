@@ -1,0 +1,26 @@
+00:00 +0: loading /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart
+00:00 +0: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +1: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +2: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +3: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +4: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +5: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +6: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +7: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +8: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=false filters and map
+00:01 +9: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/responsive_theme_test.dart: 320.0 Brightness.light shell and empty search
+00:02 +10: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=true filters and map
+00:02 +11: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 dark=true filters and map
+00:02 +12: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/responsive_theme_test.dart: 1200.0 Brightness.light shell and empty search
+00:02 +13: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 600.0 dark=false filters and map
+00:02 +14: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 600.0 dark=true filters and map
+00:03 +15: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 899.0 dark=false filters and map
+00:03 +16: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 899.0 dark=true filters and map
+00:04 +17: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 900.0 dark=false filters and map
+00:04 +18: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 900.0 dark=true filters and map
+00:04 +19: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 1440.0 dark=false filters and map
+00:05 +20: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 1440.0 dark=true filters and map
+00:05 +21: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 320.0 with large text
+00:05 +22: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 900.0 with large text
+00:05 +23: /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/discovery_test.dart: discovery 1440.0 with large text
+00:05 +24: All tests passed!

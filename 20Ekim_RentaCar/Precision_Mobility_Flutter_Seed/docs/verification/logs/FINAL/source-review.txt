@@ -1,0 +1,4 @@
+Targeted lib/ source checks, 2026-10-20:
+No imports for HTTP/provider/camera/GPS packages searched.
+No remote URL literals or embedded private-key markers found.
+Scope is narrow; not an independent security or dependency audit.

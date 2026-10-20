@@ -1,0 +1,3 @@
+00:00 +0: loading /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/demo_journey_test.dart
+00:00 +0: complete sample reservation and 20-slot physical handover journey
+00:04 +1: All tests passed!

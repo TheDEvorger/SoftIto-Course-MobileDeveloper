@@ -1,0 +1,24 @@
+name: MeHEnG quality
+on:
+  push:
+  pull_request:
+jobs:
+  flutter-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Create minimal platform files
+        run: flutter create --project-name meheng --org com.meheng --platforms=linux .
+      - name: Resolve dependencies
+        run: flutter pub get
+      - name: Python integrity gates
+        run: python3 tool/verify_seed.py
+      - name: Dart format check
+        run: dart format --output=none --set-exit-if-changed lib test
+      - name: Flutter static analysis
+        run: flutter analyze
+      - name: Flutter tests
+        run: flutter test

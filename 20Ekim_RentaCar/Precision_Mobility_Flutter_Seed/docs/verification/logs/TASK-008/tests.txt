@@ -1,0 +1,6 @@
+00:00 +0: loading /workspace/scratch/502281929184/work/Precision_Mobility_Flutter_Seed/test/fleet_test.dart
+00:00 +0: roles, tenant and branch contexts gate mutations
+00:00 +1: fleet 320.0 adapts and roles control actions
+00:01 +2: fleet 1200.0 adapts and roles control actions
+00:01 +3: desktop Tab traversal and Enter activate fleet action
+00:01 +4: All tests passed!

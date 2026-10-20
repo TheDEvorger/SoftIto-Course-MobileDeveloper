@@ -1,0 +1,2 @@
+Checked 80 authored text files; cap 300.
+PASS: authored file boundaries and required files.
