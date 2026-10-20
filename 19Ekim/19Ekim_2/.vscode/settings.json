@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^swift tools/generate_app_icons\\.swift /Users/d1-2/Desktop/MyProjectFirstSteps/19Ekim$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
