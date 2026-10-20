@@ -12,9 +12,14 @@ import '../widgets/department_selector.dart';
 /// Yeni kurgusal hasta kabulü. Başarılı kayıtta oluşan ziyareti
 /// `Navigator.pop` ile önceki ekrana döndürür.
 class PatientIntakeView extends StatefulWidget {
-  const PatientIntakeView({super.key, required this.store});
+  const PatientIntakeView({
+    super.key,
+    required this.store,
+    this.onCreated,
+  });
 
   final DemoClinicStore store;
+  final ValueChanged<CollectionVisit>? onCreated;
 
   /// Formu açar; kayıt yapılırsa oluşan ziyareti döner.
   static Future<CollectionVisit?> open(
@@ -49,7 +54,23 @@ class _PatientIntakeViewState extends State<PatientIntakeView> {
   void _submit() {
     FocusScope.of(context).unfocus();
     final CollectionVisit? visit = _controller.submit();
-    if (visit != null) Navigator.of(context).pop(visit);
+    if (visit != null) {
+      widget.onCreated?.call(visit);
+      if (Navigator.canPop(context)) {
+        Navigator.of(context).pop(visit);
+      } else {
+        _controller.clear();
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(
+                  '${Formatters.queueNumber(visit.queueNumber)} sıraya eklendi.'),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+      }
+    }
   }
 
   Future<void> _pickTime() async {
@@ -72,14 +93,17 @@ class _PatientIntakeViewState extends State<PatientIntakeView> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final bool canPop = Navigator.canPop(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Yeni Hasta Kabulü'),
-        leading: IconButton(
-          tooltip: 'Kapat',
-          icon: const Icon(Icons.close_rounded),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        leading: canPop
+            ? IconButton(
+                tooltip: 'Kapat',
+                icon: const Icon(Icons.close_rounded),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
       ),
       body: PageFrame(
         maxWidth: 680,

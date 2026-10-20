@@ -66,6 +66,15 @@ class PatientIntakeController {
 
   void regenerateCode() => codeCtrl.text = store.suggestPatientCode();
 
+  void clear() {
+    nameCtrl.clear();
+    codeCtrl.text = store.suggestPatientCode();
+    noteCtrl.clear();
+    department.value = null;
+    appointment.value = null;
+    submitError.value = null;
+  }
+
   /// Form geçerliyse hastayı kaydeder ve oluşan ziyareti döner.
   CollectionVisit? submit() {
     submitError.value = null;
