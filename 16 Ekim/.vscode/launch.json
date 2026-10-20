@@ -1,0 +1,1 @@
+{"version":"0.2.0","configurations":[{"name":"Dil Rotası (Chrome)","request":"launch","type":"dart","deviceId":"chrome"},{"name":"Dil Rotası (Seçili cihaz)","request":"launch","type":"dart"}]}
