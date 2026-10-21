@@ -2,17 +2,26 @@ import 'package:flutter/material.dart';
 import '../domain/evidence_draft.dart';
 import '../domain/evidence_template.dart';
 
+/// 20 açılı araç inceleme simülasyon ekranı.
+/// Kullanıcının 20 farklı açıdan kanıt yüklemesini ve insan incelemesi onayını simüle eder.
 class InspectionDemoScreen extends StatefulWidget {
   const InspectionDemoScreen(
       {super.key, required this.draft, required this.onSave});
+
+  /// Üzerinde çalışılan inceleme taslağı
   final EvidenceDraft draft;
+
+  /// Değişiklikler olduğunda taslağı kaydeden geri çağırma
   final ValueChanged<EvidenceDraft> onSave;
+
   @override
   State<InspectionDemoScreen> createState() => _InspectionDemoScreenState();
 }
 
 class _InspectionDemoScreenState extends State<InspectionDemoScreen> {
+  // Test amacıyla sonraki yüklemenin başarısız olmasını simüle eden bayrak
   bool _failNext = false;
+
   EvidenceDraft get _draft => widget.draft;
 
   void _change(VoidCallback action) => setState(() {

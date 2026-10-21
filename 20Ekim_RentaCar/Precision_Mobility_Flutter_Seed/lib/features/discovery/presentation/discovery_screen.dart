@@ -6,6 +6,8 @@ import '../domain/demo_vehicle.dart';
 import 'vehicle_card.dart';
 import 'discovery_map.dart';
 
+/// Araç keşif ana ekranı.
+/// Arama, filo filtreleme, liste görünümü ve adaptif şematik harita sunar.
 class DiscoveryScreen extends StatefulWidget {
   const DiscoveryScreen({super.key});
   @override
@@ -13,9 +15,16 @@ class DiscoveryScreen extends StatefulWidget {
 }
 
 class _DiscoveryScreenState extends State<DiscoveryScreen> {
+  // Arama metni
   String _query = '';
+
+  // Sadece filo araçlarını filtreleme bayrağı
   bool _fleetOnly = false;
+
+  // Dar ekranda harita mı liste mi görüntüleneceğini belirleyen bayrak
   bool _showMap = false;
+
+  // Haritada veya listede seçilen araç
   DemoVehicle? _selected;
 
   @override

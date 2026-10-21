@@ -12,8 +12,8 @@ its dependencies are completed; never change states blindly.
 | TASK-003 | Design system and accessibility | done | 001 |
 | TASK-004 | Venture edit archive | done | 002 |
 | TASK-005 | Evidence source and provenance | done | 002 |
-| TASK-006 | Decision log | ready | 005 |
-| TASK-007 | Experiment method and success rule | blocked | 006 |
+| TASK-006 | Decision log | done | 005 |
+| TASK-007 | Experiment method and success rule | ready | 006 |
 | TASK-008 | Data export and safe backup | ready | 005 |
 | TASK-009 | Workspace tasks and milestones | ready | 004 |
 | TASK-010 | Lean canvas workspace | blocked | 009 |

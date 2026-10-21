@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import '../domain/demo_vehicle.dart';
 
-/// A schematic fixture view; positions are not coordinates or user locations.
+/// Şematik harita görünümü.
+/// Gerçek GPS koordinatları veya harita sağlayıcısı (Google Maps vb.) kullanmaz;
+/// araçların temsili konumlarını şematik bir ızgara üzerinde simüle eder.
 class DiscoveryMap extends StatelessWidget {
   const DiscoveryMap(
       {super.key,
       required this.vehicles,
       required this.selected,
       required this.onSelected});
+
+  /// Haritada işaretlenecek araçlar listesi
   final List<DemoVehicle> vehicles;
+
+  /// Kullanıcının o an seçtiği araç (işaretçi vurgusu için)
   final DemoVehicle? selected;
+
+  /// Bir araç işareti tıklandığında çağrılan geri çağırma
   final ValueChanged<DemoVehicle> onSelected;
 
+  // Araçların harita üzerindeki sabit temsili yerleşim hizalamaları
   static const _positions = [
     Alignment(-0.65, -0.65),
     Alignment(0.55, -0.25),

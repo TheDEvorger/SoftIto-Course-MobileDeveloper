@@ -1,26 +1,43 @@
 import 'package:flutter/material.dart';
 import '../domain/demo_handover.dart';
 
+/// Araç teslim alma (Handover) simülasyon ekranı.
+/// Ön koşulların işaretlenmesi, 20 açılı araç incelemesinin açılması,
+/// dijital kilit simülasyonu ve karşılıklı kabul onayını yönetir.
 class HandoverDemoScreen extends StatefulWidget {
   const HandoverDemoScreen(
       {super.key,
       required this.bookingId,
       required this.isBookingConfirmed,
       this.openInspection});
+
+  /// Teslim alınacak rezervasyon kimliği
   final String bookingId;
+
+  /// Rezervasyonun hala onaylı olup olmadığını kontrol eden fonksiyon
   final bool Function() isBookingConfirmed;
+
+  /// 20 açılı inceleme ekranını açan fonksiyon
   final Future<bool> Function(BuildContext)? openInspection;
+
   @override
   State<HandoverDemoScreen> createState() => _HandoverDemoScreenState();
 }
 
 class _HandoverDemoScreenState extends State<HandoverDemoScreen> {
+  // Aktif teslim oturumu modeli
   DemoHandover _session = DemoHandover(HandoverMode.physical);
+
+  // Ön kontrol koşul bayrakları
   bool _window = false, _driver = false, _ready = false, _compatible = false;
+
+  // Tamamlama gereksinimleri bayrakları
   bool _inspection = false,
       _readings = false,
       _parties = false,
       _accept = false;
+
+  // Durum ve geri bildirim mesajı
   String _message = 'Ön koşulları temsili olarak işaretleyin.';
 
   void _run(VoidCallback action, String success) {

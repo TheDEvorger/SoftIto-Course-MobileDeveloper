@@ -1,5 +1,11 @@
+/// Rezervasyon yaşam döngüsü durumları:
+/// - quoted: Teklif oluşturuldu, kullanıcı onayı bekleniyor.
+/// - confirmed: Kullanıcı tarafından onaylandı, araç tahsis edildi.
+/// - cancelled: İptal edildi, araç serbest bırakıldı.
+/// - expired: 5 dakikalık teklif süresi doldu.
 enum BookingState { quoted, confirmed, cancelled, expired }
 
+/// Rezervasyon veri kaydı modeli.
 class DemoBooking {
   const DemoBooking(
       {required this.id,
@@ -10,16 +16,35 @@ class DemoBooking {
       required this.expiresAt,
       required this.total,
       this.state = BookingState.quoted});
+
+  /// Rezervasyon kayıt kimliği (örn. 'demo-1')
   final String id;
+
+  /// Kiralanan aracın kimliği
   final String vehicleId;
+
+  /// Araç adı
   final String vehicleName;
+
+  /// Kiralama başlangıç zamanı
   final DateTime start;
+
+  /// Kiralama bitiş zamanı
   final DateTime end;
+
+  /// Teklifin geçerlilik bitiş zamanı (oluşturulduktan 5 dakika sonra)
   final DateTime expiresAt;
+
+  /// Toplam ücret tutarı
   final int total;
+
+  /// Rezervasyonun güncel durumu
   final BookingState state;
+
+  /// Demo poliçe sürümü
   String get policyVersion => 'demo-v1';
 
+  /// Durumu güncellenmiş yeni bir DemoBooking kopyası üretir (immutability).
   DemoBooking withState(BookingState value) => DemoBooking(
       id: id,
       vehicleId: vehicleId,
@@ -31,12 +56,14 @@ class DemoBooking {
       state: value);
 }
 
-/// In-memory fixture ledger. Production pricing/locking belongs on a server.
+/// Bellek içi rezervasyon defteri (In-memory ledger).
+/// Teklif oluşturma, çakışma (overlap) denetimi, onaylama ve iptal mantığını barındırır.
 class BookingLedger {
   final Map<String, DemoBooking> _records = {};
   int _sequence = 0;
   List<DemoBooking> get records => List.unmodifiable(_records.values);
 
+  /// Yeni bir kiralama teklifi oluşturur ve 5 dakikalık süre başlatır.
   DemoBooking quote(
       {required String vehicleId,
       required String vehicleName,
@@ -66,6 +93,7 @@ class BookingLedger {
     return record;
   }
 
+  /// Rezervasyonu kimliğe göre getirir; teklif süresi dolmuşsa durumunu 'expired' yapar.
   DemoBooking get(String id, DateTime now) {
     var record = _records[id];
     if (record == null) throw StateError('Örnek rezervasyon bulunamadı.');
@@ -77,6 +105,7 @@ class BookingLedger {
     return record;
   }
 
+  /// Teklifi onaylar ve çakışan başka onaylı rezervasyon olup olmadığını doğrular.
   DemoBooking confirm(String id, DateTime now) {
     final record = get(id, now);
     if (record.state != BookingState.quoted) {
@@ -92,6 +121,7 @@ class BookingLedger {
     return _records[id] = record.withState(BookingState.confirmed);
   }
 
+  /// Onaylı veya teklif aşamasındaki rezervasyonu iptal eder.
   DemoBooking cancel(String id, DateTime now) {
     final record = get(id, now);
     if (record.state != BookingState.quoted &&

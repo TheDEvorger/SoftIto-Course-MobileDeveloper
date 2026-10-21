@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:meheng/features/discover/domain/decision.dart';
 import 'package:meheng/features/discover/domain/evidence.dart';
 import 'package:meheng/features/discover/presentation/discover_providers.dart';
 import 'package:meheng/features/discover/presentation/discover_view_model.dart';
@@ -122,6 +123,56 @@ void main() {
       );
       expect(
         () => vm.addEvidence('x1', '    ', EvidenceDirection.supports),
+        throwsArgumentError,
+      );
+    });
+  });
+
+  group('Discover Providers & ViewModel - Decisions', () {
+    test('initial state has empty decisions', () {
+      expect(container.read(decisionsProvider('v1')), isEmpty);
+    });
+
+    test('addDecision succeeds and invalidates decisionsProvider', () {
+      final vm = container.read(discoverViewModelProvider);
+
+      vm.addDecision(
+        ventureId: 'v1',
+        outcome: DecisionOutcome.pivot,
+        rationale: 'Fiyat modeli B2C yerine B2B SaaS modeline dönüştürülmeli.',
+        evidenceIds: ['ev-1', 'ev-2'],
+      );
+
+      final list = container.read(decisionsProvider('v1'));
+      expect(list.length, 1);
+      expect(list.first.outcome, DecisionOutcome.pivot);
+      expect(
+        list.first.rationale,
+        'Fiyat modeli B2C yerine B2B SaaS modeline dönüştürülmeli.',
+      );
+      expect(list.first.evidenceIds, ['ev-1', 'ev-2']);
+      expect(list.first.ventureId, 'v1');
+    });
+
+    test('addDecision throws ArgumentError on short rationale (< 5 chars)', () {
+      final vm = container.read(discoverViewModelProvider);
+
+      expect(
+        () => vm.addDecision(
+          ventureId: 'v1',
+          outcome: DecisionOutcome.stop,
+          rationale: 'az',
+          evidenceIds: [],
+        ),
+        throwsArgumentError,
+      );
+      expect(
+        () => vm.addDecision(
+          ventureId: 'v1',
+          outcome: DecisionOutcome.continueRun,
+          rationale: '    ',
+          evidenceIds: [],
+        ),
         throwsArgumentError,
       );
     });

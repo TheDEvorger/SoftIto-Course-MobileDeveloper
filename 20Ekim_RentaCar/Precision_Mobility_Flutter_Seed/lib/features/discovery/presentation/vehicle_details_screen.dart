@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import '../../../shared/widgets/precision_empty_state.dart';
 import '../domain/demo_vehicle.dart';
 
+/// Seçilen aracın teknik özelliklerini, açıklamasını ve fiyatını gösteren detay ekranı.
+/// Kullanıcı bu ekrandan demo rezervasyon adımına ilerleyebilir.
 class VehicleDetailsScreen extends StatelessWidget {
   const VehicleDetailsScreen({super.key, required this.vehicleId});
+
+  /// Görüntülenecek aracın benzersiz kimliği
   final String vehicleId;
 
   @override

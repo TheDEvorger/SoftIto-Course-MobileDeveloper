@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 import 'palette.dart';
 import 'precision_tokens.dart';
 
+/// Precision Mobility tema yapılandırıcı.
+/// Açık ve koyu tema modları için Material 3 renk şemalarını, buton ve kart stillerini üretir.
 abstract final class PrecisionTheme {
+  /// Açık tema (Light theme) tanımı
   static ThemeData light() => _build(Brightness.light);
+
+  /// Koyu tema (Dark theme) tanımı
   static ThemeData dark() => _build(Brightness.dark);
 
+  /// Belirtilen parlaklık değerine göre eksiksiz ThemeData nesnesini oluşturur.
   static ThemeData _build(Brightness brightness) {
     final dark = brightness == Brightness.dark;
+    // Arka plan, yüzey ve metin renkleri paletten çekilir
     final background = dark ? Palette.carbonBlack : Palette.arcticWhite;
     final surface = dark ? Palette.smokedGraphite : Colors.white;
     final ink = dark ? Palette.arcticWhite : Palette.carbonBlack;
     final primary = dark ? Palette.coldPlatinum : Palette.smokedGraphite;
+
+    // Material 3 renk şeması yapılandırması
     final scheme = ColorScheme.fromSeed(
       seedColor: Palette.precisionBlueGrey,
       brightness: brightness,
@@ -28,6 +37,7 @@ abstract final class PrecisionTheme {
       onError: dark ? Palette.carbonBlack : Colors.white,
     );
     final base = ThemeData(useMaterial3: true, colorScheme: scheme);
+    // Butonlar için ortak oval köşe formu
     final buttonShape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(PrecisionSpace.md),
     );

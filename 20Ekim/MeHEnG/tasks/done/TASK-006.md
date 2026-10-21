@@ -1,6 +1,6 @@
 # TASK-006: Decision log
 
-Status: ready
+Status: done
 Depends: TASK-005
 Priority: P1
 

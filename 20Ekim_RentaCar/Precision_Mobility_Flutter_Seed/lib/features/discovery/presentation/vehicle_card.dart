@@ -4,8 +4,12 @@ import 'vehicle_details_screen.dart';
 import '../domain/demo_vehicle.dart';
 import '../../../shared/widgets/precision_button.dart';
 
+/// Keşif ekranında her bir aracı listeleyen kart bileşeni.
+/// Araç görseli temsili ikonu, isim, kategori, mesafe ve fiyat bilgisini gösterir.
 class VehicleCard extends StatelessWidget {
   const VehicleCard({super.key, required this.vehicle});
+
+  /// Kartta gösterilecek araç verisi
   final DemoVehicle vehicle;
   @override
   Widget build(BuildContext context) {

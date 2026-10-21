@@ -5,17 +5,27 @@ import '../features/bookings/presentation/bookings_screen.dart';
 import '../features/garage/presentation/garage_screen.dart';
 import '../features/profile/presentation/profile_screen.dart';
 
+/// Uygulama kabuğu (AppShell).
+/// Ekran genişliğine göre uyum sağlayan (adaptive) gezinme çubuğu (Bottom Navigation veya NavigationRail) sunar.
 class AppShell extends StatefulWidget {
   const AppShell(
       {super.key, required this.themeMode, required this.onThemeChanged});
+
+  /// Mevcut tema modu
   final ThemeMode themeMode;
+
+  /// Tema modu değiştiğinde çağrılan geri çağırma (callback)
   final ValueChanged<ThemeMode> onThemeChanged;
+
   @override
   State<AppShell> createState() => _AppShellState();
 }
 
 class _AppShellState extends State<AppShell> {
+  // Seçili sekme dizini (0: Keşfet, 1: Araçlar/Filo, 2: Sürüşlerim, 3: Hesabım)
   int _index = 0;
+
+  // Mobil alt gezinme çubuğu hedefleri
   static const destinations = [
     NavigationDestination(icon: Icon(Icons.explore_outlined), label: 'Keşfet'),
     NavigationDestination(
@@ -27,6 +37,7 @@ class _AppShellState extends State<AppShell> {
 
   @override
   Widget build(BuildContext context) {
+    // Sekmelerde görüntülenecek ekranlar
     final pages = <Widget>[
       const DiscoveryScreen(),
       const GarageScreen(workspace: FleetWorkspaceScreen()),
@@ -35,7 +46,9 @@ class _AppShellState extends State<AppShell> {
           themeMode: widget.themeMode, onThemeChanged: widget.onThemeChanged),
     ];
     return LayoutBuilder(builder: (context, constraints) {
+      // 840px ve üzeri ekranlar geniş ekran (tablet/desktop) kabul edilir
       final wide = constraints.maxWidth >= 840;
+      // Geçerli sekmeyi bellek ve durum kaybı olmadan göstermek için IndexedStack kullanılır
       final body = IndexedStack(index: _index, children: pages);
       return Scaffold(
         appBar: AppBar(
@@ -51,6 +64,7 @@ class _AppShellState extends State<AppShell> {
                     child: Text('DEMO', style: TextStyle(letterSpacing: 2))))
           ],
         ),
+        // Geniş ekranda yan menü (NavigationRail), dar ekranda doğrudan sayfa gövdesi
         body: wide
             ? Row(children: [
                 NavigationRail(

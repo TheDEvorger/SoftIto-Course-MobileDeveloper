@@ -4,11 +4,16 @@ import '../application/demo_booking_scope.dart';
 import '../domain/booking_ledger.dart';
 import 'booking_demo_screen.dart';
 
+/// "Sürüşlerim" sekmesi ekranı.
+/// Oturum süresince oluşturulan tüm rezervasyon kayıtlarını listeler;
+/// teslim ekranını açma veya rezervasyonu iptal etme aksiyonları sunar.
 class BookingsScreen extends StatelessWidget {
   const BookingsScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    // DemoBookingScope üzerinden rezervasyon controller'ı alınır
     final controller = DemoBookingScope.of(context);
+    // Kayıtlar listelenirken anlık geçerlilik (expiration) durumları hesaplanır
     final records = controller.ledger.records
         .map((r) => controller.ledger.get(r.id, controller.clock()))
         .toList();

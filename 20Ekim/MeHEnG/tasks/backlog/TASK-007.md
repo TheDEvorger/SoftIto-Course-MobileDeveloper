@@ -1,6 +1,6 @@
 # TASK-007: Experiment method and success rule
 
-Status: blocked
+Status: ready
 Depends: TASK-006
 Priority: P1
 

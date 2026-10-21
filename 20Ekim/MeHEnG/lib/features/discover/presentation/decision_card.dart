@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../domain/decision.dart';
-import '../../domain/evidence.dart';
-import '../discover_providers.dart';
+import '../domain/decision.dart';
+import '../domain/evidence.dart';
+import 'discover_providers.dart';
 
 class DecisionCard extends ConsumerWidget {
   const DecisionCard({

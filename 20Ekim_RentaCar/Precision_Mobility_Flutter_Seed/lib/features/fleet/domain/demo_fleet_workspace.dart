@@ -1,29 +1,49 @@
+/// Filo simülasyon rolleri (Görüntüleyici: salt-okunur, Operatör: işlem yapabilir, Yönetici: tam yetki)
 enum FleetDemoRole { viewer, operator, manager }
 
+/// Filo araç durumu (Müsait veya Bakımda)
 enum FleetVehicleStatus { available, maintenance }
 
+/// Örnek kurumsal filo organizasyonları
 const demoOrganizations = {
   'north': 'Örnek Kuzey Filo',
   'south': 'Örnek Güney Filo'
 };
+
+/// Örnek şube tanımları (Organizasyon Kimliği, Şube Adı)
 const demoBranches = {
   'north-center': ('north', 'Örnek Merkez'),
   'north-west': ('north', 'Örnek Batı'),
   'south-center': ('south', 'Örnek Güney Merkez'),
 };
 
+/// Filoya ait araç modeli
 class FleetVehicle {
   const FleetVehicle(this.id, this.organizationId, this.branchId, this.name,
       {this.status = FleetVehicleStatus.available});
+
+  /// Araç kimliği
   final String id;
+
+  /// Ait olduğu organizasyon
   final String organizationId;
+
+  /// Ait olduğu şube
   final String branchId;
+
+  /// Araç adı
   final String name;
+
+  /// Bakım / uygunluk durumu
   final FleetVehicleStatus status;
+
+  /// Durumu güncellenmiş yeni araç örneği oluşturur
   FleetVehicle withStatus(FleetVehicleStatus value) =>
       FleetVehicle(id, organizationId, branchId, name, status: value);
 }
 
+/// Çoklu kiracılı (multi-tenant) filo çalışma alanı yönetim sınıfı.
+/// Organizasyon, şube ve rol simülasyonunu yönetir.
 class DemoFleetWorkspace {
   String _organizationId = 'north';
   String? _branchId;

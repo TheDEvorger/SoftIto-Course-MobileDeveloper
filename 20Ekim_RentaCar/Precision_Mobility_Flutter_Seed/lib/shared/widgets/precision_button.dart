@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// Precision buton stil çeşitleri (birincil dolu veya ikincil kenarlıklı)
 enum PrecisionButtonStyle { primary, secondary }
 
+/// Uygulama standardı düğme bileşeni.
+/// Material 3 FilledButton ve OutlinedButton yapılarını tek bir arayüzde birleştirir.
 class PrecisionButton extends StatelessWidget {
   const PrecisionButton({
     super.key,
@@ -10,8 +13,13 @@ class PrecisionButton extends StatelessWidget {
     this.style = PrecisionButtonStyle.primary,
   });
 
+  /// Düğme üzerinde görüntülenecek metin
   final String label;
+
+  /// Tıklama olayı geri çağırma fonksiyonu (null ise devre dışı kalır)
   final VoidCallback? onPressed;
+
+  /// Düğme görsel stili
   final PrecisionButtonStyle style;
 
   @override

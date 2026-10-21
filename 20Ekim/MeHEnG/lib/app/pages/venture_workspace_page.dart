@@ -139,6 +139,8 @@ class VentureWorkspacePage extends ConsumerWidget {
               ),
               const SizedBox(height: 24),
               HypothesesSection(ventureId: ventureId),
+              const SizedBox(height: 32),
+              DecisionsSection(ventureId: ventureId),
             ],
           ),
         ),

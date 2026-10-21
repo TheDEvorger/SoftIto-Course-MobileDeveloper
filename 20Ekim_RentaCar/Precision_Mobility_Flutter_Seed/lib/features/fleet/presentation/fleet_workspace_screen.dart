@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import '../../../shared/widgets/section_heading.dart';
 import '../domain/demo_fleet_workspace.dart';
 
+/// Filo araç durumunu kullanıcı dostu metne dönüştürür
 String fleetStatusLabel(FleetVehicleStatus status) =>
     status == FleetVehicleStatus.available ? 'Örnek uygun' : 'Örnek bakımda';
+
+/// Filo rolünü kullanıcı dostu metne dönüştürür
 String fleetRoleLabel(FleetDemoRole role) => switch (role) {
       FleetDemoRole.viewer => 'Demo görüntüleyici',
       FleetDemoRole.operator => 'Demo operatör',
       FleetDemoRole.manager => 'Demo yönetici',
     };
 
+/// Filo yöneticisi ve operatörleri için çalışma alanı (Dashboard) ekranı.
+/// Organizasyon seçimi, şube filtreleme ve bakım durumu geçişlerini simüle eder.
 class FleetWorkspaceScreen extends StatefulWidget {
   const FleetWorkspaceScreen({super.key, this.workspace});
+
+  /// Opsiyonel filo çalışma alanı modeli (testler için enjekte edilebilir)
   final DemoFleetWorkspace? workspace;
+
   @override
   State<FleetWorkspaceScreen> createState() => _FleetWorkspaceScreenState();
 }

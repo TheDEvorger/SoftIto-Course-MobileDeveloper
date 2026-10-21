@@ -1,22 +1,35 @@
 import 'evidence_template.dart';
 
+/// 20 açılı araç inceleme taslağı modeli.
+/// Slot durumlarını, kabul edilen fotoğraf sayısını ve JSON serileştirme/geri yükleme işlemlerini yönetir.
 class EvidenceDraft {
   EvidenceDraft(this.bookingId) {
     if (bookingId.isEmpty) {
       throw ArgumentError('Örnek rezervasyon kimliği gerekli.');
     }
   }
+
+  /// Bağlı olduğu rezervasyonun kimliği
   final String bookingId;
+
+  // 20 çekim açısına karşılık gelen slot listesi
   final List<EvidenceSlot> _slots =
       List.generate(20, (_) => const EvidenceSlot());
+
+  /// Slotların dışarıdan salt-okunur listesi
   List<EvidenceSlot> get slots => List.unmodifiable(_slots);
+
+  /// Kabul edilmiş slotların toplam adedi
   int get acceptedCount => _slots
       .where((s) =>
           s.status == EvidenceStatus.received &&
           s.review == EvidenceReview.accepted)
       .length;
+
+  /// Tüm 20 açının başarıyla incelenip kabul edilip edilmediği
   bool get isComplete => acceptedCount == evidenceAngles.length;
 
+  /// Belirtilen açı için yükleme işlemini başlatır.
   void startUpload(int index) {
     _validate(index);
     if (_slots[index].status == EvidenceStatus.uploading) {
@@ -25,6 +38,7 @@ class EvidenceDraft {
     _slots[index] = const EvidenceSlot(status: EvidenceStatus.uploading);
   }
 
+  /// Kanıtın sunucuya ulaştığını ve alındı zaman damgasını kaydeder.
   void receive(int index, DateTime now) {
     _validate(index);
     if (_slots[index].status != EvidenceStatus.uploading) {
@@ -34,6 +48,7 @@ class EvidenceDraft {
         EvidenceSlot(status: EvidenceStatus.received, receivedAt: now);
   }
 
+  /// Yükleme başarısızlığını simüle eder.
   void fail(int index) {
     _validate(index);
     if (_slots[index].status != EvidenceStatus.uploading) {
@@ -42,6 +57,7 @@ class EvidenceDraft {
     _slots[index] = const EvidenceSlot(status: EvidenceStatus.failed);
   }
 
+  /// Alınan kanıtı insan denetimiyle kabul eder veya yeniden çekim ister.
   void review(int index, {required bool accepted}) {
     _validate(index);
     final slot = _slots[index];

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import '../domain/booking_ledger.dart';
 
+/// Rezervasyon durumu ve işlemlerini yöneten ChangeNotifier sınıfı.
+/// UI bileşenlerini değişikliklerden haberdar eder (notifyListeners).
 class DemoBookingController extends ChangeNotifier {
+  /// Rezervasyon kayıt defteri
   final BookingLedger ledger = BookingLedger();
+
+  /// Test edilebilirlik için saat fonksiyonu (varsayılan: DateTime.now)
   DateTime Function() clock = DateTime.now;
 
+  /// Belirtilen gün sayısı (1-7 gün) için teklif üretir.
   DemoBooking quote(
       {required String vehicleId,
       required String vehicleName,
@@ -24,6 +30,7 @@ class DemoBookingController extends ChangeNotifier {
     return result;
   }
 
+  /// Belirtilen teklifi onaylar ve dinleyicileri uyarır.
   DemoBooking confirm(String id) {
     try {
       return ledger.confirm(id, clock());
@@ -32,6 +39,7 @@ class DemoBookingController extends ChangeNotifier {
     }
   }
 
+  /// Belirtilen rezervasyonu iptal eder ve dinleyicileri uyarır.
   DemoBooking cancel(String id) {
     try {
       return ledger.cancel(id, clock());
@@ -41,6 +49,7 @@ class DemoBookingController extends ChangeNotifier {
   }
 }
 
+/// Widget ağacında DemoBookingController'a erişim sağlayan InheritedNotifier sınıfı.
 class DemoBookingScope extends InheritedNotifier<DemoBookingController> {
   const DemoBookingScope(
       {super.key,
@@ -48,6 +57,7 @@ class DemoBookingScope extends InheritedNotifier<DemoBookingController> {
       required super.child})
       : super(notifier: controller);
 
+  /// Alt widget'lardan controller'a güvenli erişim metodu
   static DemoBookingController of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<DemoBookingScope>()!.notifier!;
 }

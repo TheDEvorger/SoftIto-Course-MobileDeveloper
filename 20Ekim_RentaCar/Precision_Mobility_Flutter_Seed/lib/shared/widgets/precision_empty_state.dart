@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/precision_tokens.dart';
 
+/// Veri bulunamadığında veya arama sonucu boş döndüğünde gösterilen boş durum (Empty State) bileşeni.
+/// Ekran okuyucular için Semantics (canlı bölge ve kapsayıcı) desteği içerir.
 class PrecisionEmptyState extends StatelessWidget {
   const PrecisionEmptyState({
     super.key,
@@ -10,8 +12,13 @@ class PrecisionEmptyState extends StatelessWidget {
     this.icon = Icons.search_off_outlined,
   });
 
+  /// Boş durum başlığı
   final String title;
+
+  /// Kullanıcıya rehberlik eden açıklama mesajı
   final String message;
+
+  /// Gösterilecek ikon
   final IconData icon;
 
   @override

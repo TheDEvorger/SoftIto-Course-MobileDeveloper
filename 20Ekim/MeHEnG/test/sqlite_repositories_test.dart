@@ -6,6 +6,7 @@ import 'package:meheng/features/discover/data/sqlite_discover_repository.dart';
 import 'package:meheng/features/discover/domain/hypothesis.dart';
 import 'package:meheng/features/discover/domain/experiment.dart';
 import 'package:meheng/features/discover/domain/evidence.dart';
+import 'package:meheng/features/discover/domain/decision.dart';
 
 void main() {
   test('private venture and evidence chain persist in SQLite', () {
@@ -130,5 +131,45 @@ void main() {
       ),
       throwsException,
     );
+  });
+
+  test('SQLite correctly stores and restores decisions linked to evidence IDs', () {
+    final db = AppDatabase.inMemory();
+    addTearDown(db.dispose);
+    final ventures = SqliteVentureRepository(db);
+    final discover = SqliteDiscoverRepository(db);
+    final now = DateTime.now();
+
+    ventures.add(
+      Venture(
+        id: 'v_dec',
+        name: 'Girişim Karar Testi',
+        problem: 'P',
+        audience: 'A',
+        createdAt: now,
+      ),
+    );
+
+    discover.addDecision(
+      Decision(
+        id: 'd1',
+        ventureId: 'v_dec',
+        outcome: DecisionOutcome.continueRun,
+        rationale: 'Kullanıcı ilgisi yüksek, mevcut plana sadık kalınmalı.',
+        evidenceIds: ['e1', 'e2'],
+        createdAt: now,
+      ),
+    );
+
+    final list = discover.decisions('v_dec');
+    expect(list.length, 1);
+    expect(list.first.id, 'd1');
+    expect(list.first.outcome, DecisionOutcome.continueRun);
+    expect(
+      list.first.rationale,
+      'Kullanıcı ilgisi yüksek, mevcut plana sadık kalınmalı.',
+    );
+    expect(list.first.evidenceIds, ['e1', 'e2']);
+    expect(list.first.ventureId, 'v_dec');
   });
 }

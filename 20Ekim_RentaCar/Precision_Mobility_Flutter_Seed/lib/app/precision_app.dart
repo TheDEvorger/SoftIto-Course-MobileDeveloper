@@ -10,6 +10,9 @@ import '../features/bookings/presentation/booking_demo_screen.dart';
 import '../features/discovery/domain/demo_vehicle.dart';
 import '../shared/widgets/precision_empty_state.dart';
 
+
+/// Precision Mobility ana uygulama bileşeni.
+/// Tema durumu, yönlendirme (routing) ve demo veri kapsamlarını (scope) yönetir.
 class PrecisionApp extends StatefulWidget {
   const PrecisionApp({super.key});
   @override
@@ -17,9 +20,13 @@ class PrecisionApp extends StatefulWidget {
 }
 
 class _PrecisionAppState extends State<PrecisionApp> {
+  // Seçili tema modu (sistem, açık veya koyu).
   ThemeMode _mode = ThemeMode.system;
+
+  // Demo rezervasyon ve denetim kontrolcüleri (yalnızca oturum belleğinde saklanır).
   final _bookings = DemoBookingController();
   final _inspections = DemoInspectionStore();
+
   @override
   void dispose() {
     _bookings.dispose();
@@ -31,11 +38,15 @@ class _PrecisionAppState extends State<PrecisionApp> {
       controller: _bookings,
       child: MaterialApp(
         title: 'Precision Mobility',
+        // Dinamik sayfa yönlendirme kuralları
         onGenerateRoute: (settings) {
+          // Teslim veya denetim sayfaları için rezervasyon doğrulama kontrolü
           if ((settings.name == '/handover' ||
                   settings.name == '/inspection') &&
               settings.arguments is String) {
             final id = settings.arguments as String;
+
+            // Rezervasyonun onaylı olup olmadığını denetleyen yardımcı fonksiyon
             bool eligible() {
               try {
                 return _bookings.ledger.get(id, _bookings.clock()).state ==
@@ -45,12 +56,15 @@ class _PrecisionAppState extends State<PrecisionApp> {
               }
             }
 
+            // Onaylı rezervasyon için araç denetim (20 açı) ekranı
             if (settings.name == '/inspection' && eligible()) {
               return MaterialPageRoute<bool>(
                   settings: settings,
                   builder: (_) => InspectionDemoScreen(
                       draft: _inspections.open(id), onSave: _inspections.save));
             }
+
+            // Araç teslim simülasyonu ekranı
             if (settings.name == '/handover') {
               return MaterialPageRoute<void>(
                   settings: settings,
@@ -63,6 +77,8 @@ class _PrecisionAppState extends State<PrecisionApp> {
                           false));
             }
           }
+
+          // Araç rezervasyon ekranı yönlendirmesi
           final vehicle = settings.arguments is String
               ? findDemoVehicle(settings.arguments as String)
               : null;

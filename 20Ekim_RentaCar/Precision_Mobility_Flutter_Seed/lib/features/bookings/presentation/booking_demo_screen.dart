@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../application/demo_booking_scope.dart';
 import '../domain/booking_ledger.dart';
 
+/// Rezervasyon durumunu kullanıcı dostu Türkçe metne dönüştürür.
 String bookingStateLabel(BookingState state) => switch (state) {
       BookingState.quoted => 'Teklif hazır',
       BookingState.confirmed => 'Demo rezervasyon onaylandı',
@@ -9,22 +10,35 @@ String bookingStateLabel(BookingState state) => switch (state) {
       BookingState.expired => 'Teklif süresi doldu',
     };
 
+/// Rezervasyon oluşturma, teklif alma ve onaylama adımlarını simüle eden ekran.
 class BookingDemoScreen extends StatefulWidget {
   const BookingDemoScreen(
       {super.key,
       required this.vehicleId,
       required this.vehicleName,
       required this.dailyRate});
+
+  /// Rezervasyon yapılacak araç kimliği
   final String vehicleId;
+
+  /// Araç model adı
   final String vehicleName;
+
+  /// Günlük kiralama birim fiyatı
   final int dailyRate;
+
   @override
   State<BookingDemoScreen> createState() => _BookingDemoScreenState();
 }
 
 class _BookingDemoScreenState extends State<BookingDemoScreen> {
+  // Seçilen kiralama gün sayısı (1, 2, 3, 7)
   int _days = 1;
+
+  // Oluşturulan teklif kimliği
   String? _id;
+
+  // Hata mesajı (varsa)
   String? _error;
 
   void _run(VoidCallback action) {

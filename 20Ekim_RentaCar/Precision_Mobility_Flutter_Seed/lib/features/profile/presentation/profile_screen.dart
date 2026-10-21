@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../../shared/widgets/section_heading.dart';
 
+/// "Hesabım" profili ve ayarlar ekranı.
+/// Tema modu seçimi (Sistem, Açık, Koyu) ve kimlik/gizlilik bilgilendirmelerini içerir.
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key, required this.themeMode, required this.onThemeChanged});
+
+  /// Seçili tema modu
   final ThemeMode themeMode;
+
+  /// Tema modu değiştiğinde çağrılan geri çağırma
   final ValueChanged<ThemeMode> onThemeChanged;
+
   @override
   Widget build(BuildContext context) => ListView(
     padding: const EdgeInsets.all(24), children: [
