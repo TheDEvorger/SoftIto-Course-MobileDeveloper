@@ -7,7 +7,8 @@ A cross-platform, premium automotive mobility platform for private vehicle owner
 - Handover: HYBRID in-person key handover and secure digitally enabled handover.
 - Platforms: Flutter mobile, web, desktop. Adaptive layout, shared business rules.
 - Visual direction: Precision Automotive Luxury, not boutique hotel and not neon gamer UI.
-- Themes: light/dark/system, using five approved signature colors plus technical neutrals.
+- Themes: light/dark/system with coordinated complementary colors. User withdrew
+  the five-color restriction and requested a full interface rebuild on 2026-10-21.
 - Core flows: identity/verification, vehicle discovery, availability, pricing, booking, check-in/out, photo evidence, AI-assisted inspection, payments, owner/fleet console.
 
 ## Explicit constraints
@@ -18,3 +19,11 @@ A cross-platform, premium automotive mobility platform for private vehicle owner
 
 ## Definition of prototype success
 An operator can demonstrate all key flows with labelled example data, accessible screens and passing automated checks; nobody mistakes a simulation for a real rental agreement.
+
+## Current local application
+User explicitly authorized a SQLite-backed local application and restoring that
+implementation after the workspace reverted. Default entrypoint now uses real
+inventory/reservation records. User additionally requested populated screens:
+TASK-013 opens a labelled isolated SQLite example workspace with functioning
+listing/calendar/quote/booking actions. Private records remain separate. Identity/payment providers remain deferred; the
+historical prototype definition above applies only to main_demo.dart.

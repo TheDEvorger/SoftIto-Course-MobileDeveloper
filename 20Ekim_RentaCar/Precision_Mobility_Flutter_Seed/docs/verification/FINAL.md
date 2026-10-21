@@ -1,5 +1,9 @@
 # Precision Mobility — prototype completion
 
+Current entrypoint and interface: see [TASK-013](TASK-013.md), 2026-10-21. It uses
+the user-approved SQLite/API workspace, rebuilt presentation and isolated populated example records. The report below
+is the historical prototype baseline, now explicitly at `main_demo.dart`.
+
 Date: 2026-10-20. TASK-001 through TASK-009 complete.
 This report supersedes earlier reports' next-task notes and test counts.
 

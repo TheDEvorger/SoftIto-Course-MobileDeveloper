@@ -9,6 +9,16 @@
 ## Future server modules
 IdentityAccess, Verification, Organizations, VehicleRegistry, Listings, Availability, Pricing, Bookings, Trips, Handover, Inspections, Payments, Payouts, Reviews, Notifications, Support, Audit.
 
+## Implemented local workspace
+`server/validation.py` owns input validation; `operations.py` owns listing,
+calendar and pricing rules; `pricing.py` signs/verifies quote payloads; `database.py` owns persistent records
+and transactional allocation; `http_server.py` owns routes and authorization.
+`examples.py` initializes only the isolated example DB; scope selection occurs
+server-side before authorization/routing. The existing SQLite records/key are preserved. `main.dart` starts the API app;
+`main_demo.dart` starts the historical simulation. Catalog/reservation controllers
+own client state; app composition injects them into the new presentation.
+`shared/design` and `core/theme/studio_*` own the rebuilt visual primitives.
+
 ## Ownership examples
 - VehicleRegistry owns the canonical vehicle record.
 - Listings owns what can be discovered; cannot own VIN registration.

@@ -14,5 +14,21 @@ Do tasks in order; one active task at a time. Move to done only with verified ac
 
 Every task must specify goal, scope, exclusions, acceptance tests, dependencies and output report.
 
-All nine prototype tasks are complete. No next task is authorized by this registry.
-Production integrations and unsigned release gates remain outside prototype scope.
+Historical tasks 001–009 are complete. Earlier session work expanded the menus
+and introduced a user-approved local SQLite server (TASK-010/011). The workspace
+was externally reverted; user explicitly authorized restoring the server.
+
+12. `done/TASK-012-interface-rebuild.md` • restore SQLite and rebuild the interface
+
+TASK-012 is complete within its local application/interface scope. The restored
+API/SQLite workspace is the normal entrypoint; legacy simulations remain explicit.
+
+Identity/payment providers and public release remain deferred by the user.
+
+13. `done/TASK-013-requirements-and-populated-workspace.md` • complete: requirement
+    map, isolated populated SQLite workspace and local listing/calendar/quote flows.
+
+14. `TASK-014-serverless-rental-app.md` • active: serverless renter app and device persistence.
+
+Full product gaps remain visible in
+`docs/product/requirements-status.md`; external integrations are not marked done.

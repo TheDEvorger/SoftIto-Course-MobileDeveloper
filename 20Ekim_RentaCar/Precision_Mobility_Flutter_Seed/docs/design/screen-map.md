@@ -12,5 +12,11 @@ Organization switcher -> overview -> vehicles -> branches -> calendar -> reserva
 ## Support/admin
 Verification queue -> claims review -> appeals -> operational audit (strict RBAC).
 
-## Current seed
-Discovery, vehicle collections demo, demo bookings, profile, theming. No real services wired.
+## Current default application
+Keşfet → API inventory → date availability → vehicle details → server quote → reservation record →
+Sürüşlerim → cancellation. Araçlar → workspace connection → create/edit/rate/maintenance → publication/date blocks.
+Hesabım → example/private connection, actual record overview, appearance and help.
+The default isolated example workspace is populated through SQLite, not a client
+fixture fallback. A persistent banner identifies fictional records in every menu. Desktop uses top navigation and a vehicle
+table; mobile uses the dock and cards. Identity/payment remain deferred.
+The original seed is explicitly retained through main_demo.dart.

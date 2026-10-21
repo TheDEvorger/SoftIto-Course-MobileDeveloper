@@ -1,19 +1,37 @@
-# Precision Automotive Luxury | palette v0.1
+# Precision Mobility — rebuilt interface
 
-## Approved signature colors
-- Precision Blue-Grey: `#6B7C86`
-- Cold Platinum: `#A9B0B6`
-- Champagne Metal: `#B79B6C`
-- Deep Noble Olive: `#505A46`
-- Smoked Graphite: `#2A2C2F`
+2026-10-21: user authorized a complete interface rebuild and varied complementary
+colors. The earlier fixed five-color restriction is superseded for the real app.
+This records the implemented direction, not a claim of final visual approval.
 
-## Technical neutrals (proposed)
-- Carbon Black: `#101216`
-- Arctic White: `#F4F6F8`
-- Titanium White: `#E8ECF0`
+## Foundation
+| Role | Color |
+| --- | --- |
+| Ink / typography | #1A2521 |
+| Paper canvas | #F5F6F2 |
+| Primary forest | #285641 |
+| Soft mint | #DAEBDD |
+| Muted copy | #59675F |
+| Accessible outline | #7E8A81 |
+| Dark canvas / surface | #111B17 / #1C2922 |
 
-## Usage
-Graphite/carbon are typography and dark surfaces; white neutrals establish breathable space. Blue-grey/platinum are precision surfaces, labels and boundaries. Champagne and olive are restrained functional/brand accents, never a blanket beige/green hotel-style atmosphere.
+## Complementary context
+| Purpose | Strong color | Soft color |
+| --- | --- | --- |
+| Available inventory and primary action | Forest #285641 | Mint #DAEBDD |
+| Connection / precision details | Teal #226C75 | Ice #DCEEF0 |
+| Maintenance context | Coral #AE4634 | Peach #F8E5DA |
+| Collection totals | Violet #7053A1 | Lilac #ECE5F6 |
+
+## Layout and imagery
+Desktop uses a horizontal navigation header and an editorial hero with large
+sans typography. Mobile uses a compact header, stacked hero and floating dock.
+Discovery cards, an operator inventory table, reservation cards and split settings
+layouts have distinct jobs. Color supports the hierarchy; it never replaces labels.
+The generated brand photograph is decorative and explicitly labelled. Actual
+listings show only their own image or an honest missing-photo placeholder.
 
 ## Accessibility
-Contrast and interactive state testing precedes visual signoff; semantic warning/error colors are separate from the brand palette. Never encode critical state solely by color.
+Text/selection and outline contrast are checked in both themes. Responsive tests
+cover 320/1440px with 100%/180% text. Wide tables switch to cards for large text;
+short pages align at the top. Historical demo still uses its separate legacy theme.

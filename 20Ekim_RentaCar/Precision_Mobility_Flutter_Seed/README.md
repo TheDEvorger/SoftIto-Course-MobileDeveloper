@@ -1,52 +1,85 @@
-# Precision Mobility | Flutter prototype v0.1.0
+# Precision Mobility
 
-A premium hybrid P2P + fleet mobility prototype. **All 9 planned prototype tasks
-are complete.** This is a local sample demonstration, not a real rental service.
+Flutter application with an editorial automotive interface and a working local
+SQLite/HTTP workspace. The default entrypoint opens a labelled, populated example workspace on the real
+SQLite API. Private operational records stay in their separate existing database.
 
 ## Run
-1. Extract and open the project directory in your editor/Antigravity.
-2. Install Flutter stable and the SDK for your target; run `flutter doctor`.
-3. `flutter pub get`
-4. `flutter analyze`
-5. `flutter test`
-6. `python tools/quality_gate.py`
-7. `flutter run -d chrome` or choose a configured native device.
 
-All six platform runners are included. Generate only missing platform files:
-`flutter create --project-name precision_mobility --platforms=android,ios,web,windows,macos,linux .`
-Inspect diffs before replacing existing files. iOS/macOS require macOS/Xcode;
-Windows requires Windows tooling and Android requires an Android SDK.
+Terminal 1, from this directory:
 
-## Available
-- Responsive discovery list/map, working search/fleet filters, schematic markers.
-- Light/dark/system themes, approved palette and reusable accessible controls.
-- Vehicle showroom with fixture attributes, owner/fleet label and back navigation.
-- Sample quotes, expiry, confirmation, cancellation and conflict prevention.
-- Physical/digital handover simulations with fail-closed prerequisites.
-- 20-angle evidence checklist with sample upload failure/retry, human-review
-  simulation and session-only resume. No camera or actual photo upload.
-- Fleet organizations/branches, viewer/operator/manager simulation and
-  adaptive tables/cards with sample maintenance actions and keyboard support.
-- Explicit security risk register, auth boundaries and unsigned production gates.
+```sh
+python3 -m server
+```
 
-## Try
-Keşfet → Aracı incele → Rezervasyon demosunu aç → Örnek teklif oluştur →
-Demo onayı ver. Return to Sürüşlerim → Teslim demosunu aç. Complete demo
-prerequisites, preflight, all 20 inspection uploads/reviews, readings and mutual
-acceptance. Digital mode additionally requires simulated compatible hardware
-and a positive sample lock acknowledgement. No real trip starts.
-Araçlar opens the fleet workspace; select a demo operator role to edit fixtures.
+Terminal 2:
 
-## Architecture and safety
-Feature-first modules; app composition owns routes and session lifetime.
-Domain logic is pure Dart. No new dependencies were added for tasks 004–009.
-All authored text files stay <=300 physical lines. No secrets, personal data,
-real payments, GPS capture, server calls, vehicle keys or hardware commands.
-Records are fictional and memory-only. Client state/roles never grant real
-permissions. See docs/security/acceptance-signoff.md for blocked production gates.
+```sh
+flutter pub get
+flutter run -d web-server --web-hostname localhost --web-port 8080
+```
 
-## Verified
-Flutter 3.47.7 / Dart 3.13.5: analyzer clean, all 45 tests passed, Python quality
-gate and web release build passed. See docs/verification/FINAL.md and per-task reports for build
-results, command logs and limitations. Native builds were not verified here.
-Antigravity continuation: docs/agent/first-prompt.md. Registry: tasks/INDEX.md.
+Open http://localhost:8080. The example workspace opens automatically with ten
+fictional vehicles, six reservations and a calendar block. All actions use the
+server and changes persist; examples are not regenerated on restart. Eight
+vehicles are published; one is in maintenance and one is unpublished.
+
+For your private workspace, in Hesabım enter the contents of `.local/operator.key`
+and choose Çalışma alanına bağlan. The server creates this
+private key only when missing; existing records and the key are preserved.
+Use Araçlar → Araç ekle to enter your own vehicles.
+
+## Interface and flows
+
+- New desktop top navigation and mobile floating dock.
+- Editorial discovery hero, search/date panel, ownership filters and actual price sorting.
+- Own listing photos or missing-photo states; labelled artwork for fictional examples only.
+- Inventory metrics, desktop management table/mobile cards, editing, publication and date blocks.
+- Grouped vehicle form, decimal-to-integer money validation and fixed save action.
+- Server quotes before confirmation; signed five-minute offers, price-change checks and atomic availability.
+- Reservation cards, active/cancelled filters and cancellation confirmation.
+- Example/private workspace switching, actual record overview, themes and contextual help.
+
+The AI-generated hero is a decorative concept photograph, labelled as such and
+never attached to an inventory vehicle. [Asset provenance](docs/design/asset-provenance.md).
+
+## Data and service scope
+
+`.local/mobility.sqlite3` holds vehicle/reservation records, including cancelled
+history. `.local/operator.key` controls this local workspace; the client keeps it
+only in memory. `.local/examples.sqlite3` holds the separate fictional collection.
+Its scoped access cannot read/write the private workspace. `.local/quotes.key` is
+a server-only quote signing secret, never sent to Flutter. `.local/` is ignored
+by Git; existing private records/key are preserved. No examples enter the private DB.
+
+The user deferred identity/payment providers. Customer accounts/verification,
+payment collection/refunds, actual inspection evidence, vehicle handover/hardware
+and a secured public multi-user deployment are not implemented by this UI task.
+No customer identity, card or GPS data is collected. A reservation record is not
+a signed rental agreement. [Server contract](server/README.md).
+
+## Configuration and platforms
+
+The API defaults to `http://127.0.0.1:8765/api/v1/`. An explicitly configured API can
+use `--dart-define=PRECISION_API_URL=https://your-server/api/v1/`. Android emulator
+development may use `http://10.0.2.2:8765/api/v1/`; cleartext exceptions are debug-only
+and limited to local hosts. To start directly with the private catalog, add
+`--dart-define=PRECISION_EXAMPLES=false`. Native platform runners and network permissions are
+retained. Native runtime/signing and physical devices are not verified here.
+
+## Verify
+
+```sh
+flutter analyze
+flutter test
+python3 -m unittest discover -s server -t . -v
+dart run tools/check_local_api.dart
+python3 tools/quality_gate.py
+flutter build web --release
+```
+
+The real HTTP check uses isolated temporary state and never touches `.local`.
+Authored text files stay <=300 lines. CI includes backend/HTTP checks.
+The historical simulation is explicitly available via `flutter run -t lib/main_demo.dart`.
+Current evidence and changed files: [TASK-013](docs/verification/TASK-013.md).
+Requirement map and deferred integrations: [requirements](docs/product/requirements-status.md).
