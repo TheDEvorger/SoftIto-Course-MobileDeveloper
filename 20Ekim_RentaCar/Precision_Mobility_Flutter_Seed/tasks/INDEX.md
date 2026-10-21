@@ -20,8 +20,8 @@ was externally reverted; user explicitly authorized restoring the server.
 
 12. `done/TASK-012-interface-rebuild.md` • restore SQLite and rebuild the interface
 
-TASK-012 is complete within its local application/interface scope. The restored
-API/SQLite workspace is the normal entrypoint; legacy simulations remain explicit.
+TASK-012 is complete within its historical local application/interface scope.
+TASK-014 supersedes its default entrypoint; SQLite/API remains optional.
 
 Identity/payment providers and public release remain deferred by the user.
 

@@ -12,11 +12,13 @@ Organization switcher -> overview -> vehicles -> branches -> calendar -> reserva
 ## Support/admin
 Verification queue -> claims review -> appeals -> operational audit (strict RBAC).
 
-## Current default application
-Keşfet → API inventory → date availability → vehicle details → server quote → reservation record →
-Sürüşlerim → cancellation. Araçlar → workspace connection → create/edit/rate/maintenance → publication/date blocks.
-Hesabım → example/private connection, actual record overview, appearance and help.
-The default isolated example workspace is populated through SQLite, not a client
-fixture fallback. A persistent banner identifies fictional records in every menu. Desktop uses top navigation and a vehicle
-table; mobile uses the dock and cards. Identity/payment remain deferred.
-The original seed is explicitly retained through main_demo.dart.
+## Current default application (TASK-014)
+Keşfet → search/city/category/date/sort → vehicle details → local price summary →
+confirmation → device receipt → Planlarım → details/copy/cancellation.
+Favoriler → saved vehicles or actionable suggestions → details.
+Profil → plan/favorite links, persisted city/theme, privacy/help/licenses.
+All catalog artwork/fonts are bundled. No workspace/key/connection screen is on
+the normal path. Empty user plans/favorites do not hide the car collection.
+
+The previous SQLite inventory/operator workspace is explicitly at main_api.dart;
+the original simulation remains main_demo.dart. Identity/payment are deferred.

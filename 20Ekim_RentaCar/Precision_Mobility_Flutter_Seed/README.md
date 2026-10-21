@@ -1,85 +1,81 @@
-# Precision Mobility
+# Precision · Araç Kiralama
 
-Flutter application with an editorial automotive interface and a working local
-SQLite/HTTP workspace. The default entrypoint opens a labelled, populated example workspace on the real
-SQLite API. Private operational records stay in their separate existing database.
+Sunucu gerektirmeyen Flutter uygulaması. Açılışta araç koleksiyonu hazırdır.
+Keşfet, Favoriler, Planlarım ve Profil ekranları doğrudan çalışır.
 
-## Run
-
-Terminal 1, from this directory:
-
-```sh
-python3 -m server
-```
-
-Terminal 2:
+## Çalıştırma
 
 ```sh
 flutter pub get
+flutter run
+```
+
+Web için sabit tarayıcı adresiyle:
+
+```sh
 flutter run -d web-server --web-hostname localhost --web-port 8080
 ```
 
-Open http://localhost:8080. The example workspace opens automatically with ten
-fictional vehicles, six reservations and a calendar block. All actions use the
-server and changes persist; examples are not regenerated on restart. Eight
-vehicles are published; one is in maintenance and one is unpublished.
+Python, API adresi veya çalışma alanı anahtarı gerekmez. Web geliştirme aracı
+statik Flutter dosyalarını sunar; kiralama verileri için bir backend çağrısı yoktur.
+Mac için bağımsız uygulama `flutter build macos --release` ile üretilir:
+`build/macos/Build/Products/Release/precision_mobility.app`.
 
-For your private workspace, in Hesabım enter the contents of `.local/operator.key`
-and choose Çalışma alanına bağlan. The server creates this
-private key only when missing; existing records and the key are preserved.
-Use Araçlar → Araç ekle to enter your own vehicles.
+## Kullanım
 
-## Interface and flows
+- Marka/model/enerji arayın; şehir, kategori, tarih ve fiyat sıralaması seçin.
+- Araç detayında özellikleri, alış noktasını ve günlük ücreti inceleyin.
+- Kalp düğmesiyle favori ekleyin veya kaldırın.
+- 1–7 günlük tarih seçip fiyat özetini onaylayarak rezervasyonu kaydedin.
+- Planlarım'da kaydı görüntüleyin, özetini kopyalayın veya iptal edin.
+- Profil'de plan/favori kısayollarını, şehir ve açık/koyu/sistem tercihlerini kullanın.
 
-- New desktop top navigation and mobile floating dock.
-- Editorial discovery hero, search/date panel, ownership filters and actual price sorting.
-- Own listing photos or missing-photo states; labelled artwork for fictional examples only.
-- Inventory metrics, desktop management table/mobile cards, editing, publication and date blocks.
-- Grouped vehicle form, decimal-to-integer money validation and fixed save action.
-- Server quotes before confirmation; signed five-minute offers, price-change checks and atomic availability.
-- Reservation cards, active/cancelled filters and cancellation confirmation.
-- Example/private workspace switching, actual record overview, themes and contextual help.
+Yeni kullanıcıya uydurma rezervasyon veya favori eklenmez. İlk plan öncesinde
+Planlarım'da araç önerileri ve çalışan planlama düğmeleri bulunur.
 
-The AI-generated hero is a decorative concept photograph, labelled as such and
-never attached to an inventory vehicle. [Asset provenance](docs/design/asset-provenance.md).
+## Cihazdaki veriler
 
-## Data and service scope
+Favoriler, yerel rezervasyonlar ve tercihler `precision.renter.v1` anahtarıyla
+cihazın uygulama depolamasında tutulur. Web kayıtları tarayıcı ve adrese özeldir;
+yeni port/tarayıcı farklı depolama kullanır. Tarayıcı verilerini temizlemek kayıtları
+kaldırır. Uygulama depolama hatasında başarı göstermez veya bozuk veriyi sıfırlamaz.
 
-`.local/mobility.sqlite3` holds vehicle/reservation records, including cancelled
-history. `.local/operator.key` controls this local workspace; the client keeps it
-only in memory. `.local/examples.sqlite3` holds the separate fictional collection.
-Its scoped access cannot read/write the private workspace. `.local/quotes.key` is
-a server-only quote signing secret, never sent to Flutter. `.local/` is ignored
-by Git; existing private records/key are preserved. No examples enter the private DB.
+Yazmalar tek uygulama oturumunda sıralanır; aynı araç/tarih çakışması ve tekrar
+istekleri kontrol edilir. Çok cihazlı canlı envanter kilidi veya tedarikçi rezervasyonu
+iddia edilmez. Gerçek ticari veriler için bu cihaz tercih deposu kullanılmamalıdır.
 
-The user deferred identity/payment providers. Customer accounts/verification,
-payment collection/refunds, actual inspection evidence, vehicle handover/hardware
-and a secured public multi-user deployment are not implemented by this UI task.
-No customer identity, card or GPS data is collected. A reservation record is not
-a signed rental agreement. [Server contract](server/README.md).
+Araç/donanım/fiyat/alış noktaları örnek koleksiyondur. Görseller temsili ve
+etiketlidir. Kaydedilen plan gerçek tedarikçiye iletilmez; ödeme, kimlik doğrulama,
+araç tahsisi veya teslim onayı yapılmaz. Kart/kimlik/GPS toplanmaz.
 
-## Configuration and platforms
+## Paket ve eski çalışma alanı
 
-The API defaults to `http://127.0.0.1:8765/api/v1/`. An explicitly configured API can
-use `--dart-define=PRECISION_API_URL=https://your-server/api/v1/`. Android emulator
-development may use `http://10.0.2.2:8765/api/v1/`; cleartext exceptions are debug-only
-and limited to local hosts. To start directly with the private catalog, add
-`--dart-define=PRECISION_EXAMPLES=false`. Native platform runners and network permissions are
-retained. Native runtime/signing and physical devices are not verified here.
+Görseller ve Roboto yazı tipleri uygulama paketindedir. Web dağıtımını dış kaynak
+bağımlılığı olmadan üretmek için `flutter build web --release --no-web-resources-cdn`
+kullanın. İlk statik dosya yüklemesinden sonra ürün akışları bağlantısız çalışır;
+web için soğuk çevrimdışı sayfa yenileme/PWA kurulumu iddia edilmez.
 
-## Verify
+Önceki SQLite dosyaları ve operatör anahtarı korunmuştur. İsteğe bağlı eski API
+çalışma alanı `lib/main_api.dart`, tarihsel simülasyon `lib/main_demo.dart` girişindedir.
+Normal `lib/main.dart` bu ekranlara veya sunucu koduna bağımlı değildir.
+
+## Kontroller
 
 ```sh
 flutter analyze
 flutter test
-python3 -m unittest discover -s server -t . -v
-dart run tools/check_local_api.dart
+flutter build web --release --no-web-resources-cdn
+python3 tools/check_serverless_browser.py
 python3 tools/quality_gate.py
-flutter build web --release
+flutter build macos --release
 ```
 
-The real HTTP check uses isolated temporary state and never touches `.local`.
-Authored text files stay <=300 lines. CI includes backend/HTTP checks.
-The historical simulation is explicitly available via `flutter run -t lib/main_demo.dart`.
-Current evidence and changed files: [TASK-013](docs/verification/TASK-013.md).
-Requirement map and deferred integrations: [requirements](docs/product/requirements-status.md).
+Tarayıcı kontrolü ayrı geçici profille çalışır; API ve dış ağ isteklerini engeller.
+Favori → rezervasyon → yenileme → tema → çevrimdışı iptal → yenileme akışını doğrular.
+`PRECISION_CHROME` ile Chromium yolu belirtilebilir. Kendi geçici statik dosya
+sunucusunu başlatıp kapatır; kullanıcı verilerine veya SQLite'a dokunmaz.
+
+Gereksinim durumu: [requirements-status](docs/product/requirements-status.md).
+Değişen dosyalar ve kanıtlar: [TASK-014](docs/verification/TASK-014.md).
+Roboto lisansı assets/fonts/Roboto_LICENSE.txt içinde; önceki görsel istemleri
+[collection-assets](docs/design/collection-assets.md) dosyasında kayıtlıdır.

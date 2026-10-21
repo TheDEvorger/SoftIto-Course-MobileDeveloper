@@ -1,7 +1,12 @@
 # Gereksinim ve teslim durumu
 
 Kaynaklar: vision.md, business-rules.md, personas.md, handover.md, screen-map.md.
-İnceleme: 2026-10-21. Tarihsel prototip görevlerinin bitmesi, ürünün tamamının
+İnceleme: 2026-10-21. TASK-014 normal uygulamayı kullanıcının açık isteğiyle
+sunucusuz hale getirdi. Keşfet/Favoriler/Planlarım/Profil, yerel fiyat ve kalıcı
+cihaz kayıtları normal akıştır. Aşağıdaki TASK-013 sunucu işlevleri main_api.dart
+ile isteğe bağlı korunur; normal uygulama için sunucu/anahtar gerekmez.
+
+Tarihsel karşılaştırma: Tarihsel prototip görevlerinin bitmesi, ürünün tamamının
 üretime hazır olduğu anlamına gelmez. TASK-013 aşağıdaki yerel akışları tamamlar.
 
 | Gereksinim | Durum | Teslim edilen / kalan sınır |

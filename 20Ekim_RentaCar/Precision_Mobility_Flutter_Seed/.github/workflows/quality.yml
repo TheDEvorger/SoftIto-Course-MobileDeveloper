@@ -16,5 +16,5 @@ jobs:
       - run: flutter test
       - run: python3 -m unittest discover -s server -t . -v
       - run: dart run tools/check_local_api.dart
-      - run: flutter build web --release
+      - run: flutter build web --release --no-web-resources-cdn
       - run: python3 tools/quality_gate.py

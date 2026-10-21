@@ -20,10 +20,13 @@ A cross-platform, premium automotive mobility platform for private vehicle owner
 ## Definition of prototype success
 An operator can demonstrate all key flows with labelled example data, accessible screens and passing automated checks; nobody mistakes a simulation for a real rental agreement.
 
-## Current local application
-User explicitly authorized a SQLite-backed local application and restoring that
-implementation after the workspace reverted. Default entrypoint now uses real
-inventory/reservation records. User additionally requested populated screens:
-TASK-013 opens a labelled isolated SQLite example workspace with functioning
-listing/calendar/quote/booking actions. Private records remain separate. Identity/payment providers remain deferred; the
-historical prototype definition above applies only to main_demo.dart.
+## Current serverless application (TASK-014)
+User explicitly requested a functioning rental app without a server after API
+errors blocked the interface. Normal main.dart now starts the renter experience:
+bundled collection, search/filter, favorites, details, local quote, reservation,
+cancellation and profile/preferences. Device storage preserves user actions.
+No API startup, workspace session, key or provider is required for these flows.
+The existing SQLite/operator implementation is preserved at main_api.dart;
+main_demo.dart remains the historical simulation. Identity/payment providers
+remain deferred. Local plans do not claim supplier confirmation, vehicle allocation,
+payment or handover. Catalog information and labelled concept images are examples.

@@ -14,3 +14,11 @@ BR-011: All chargebacks, refunds, decisions and ownership changes are auditable.
 BR-012: Organizations and branches are separate authorization contexts.
 BR-013: A digitally unlocked vehicle must be compatible, eligible and confirmed unlocked before claiming success.
 BR-014: Cancellation, extensions and penalties follow an explicit policy version.
+
+## Explicit serverless local scope (TASK-014)
+The user requested that the normal app work without any server. Its quotes and
+plans are calculated/validated on the device, do not claim supplier allocation
+or commercial confirmation and cannot enforce availability across devices.
+BR-004/005 remain required server invariants before live supplier bookings. Local
+writes are serialized, prices use integer minor units, retries are idempotent and
+cancellation preserves history. Identity/payment/handover constraints still apply.

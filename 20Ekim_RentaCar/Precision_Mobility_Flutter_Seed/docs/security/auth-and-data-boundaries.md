@@ -1,6 +1,20 @@
 # Authorization and data boundaries
 
-## Current local application (TASK-012/013)
+## Default serverless application (TASK-014)
+User explicitly superseded the normal API requirement with a serverless renter
+experience. There is no customer login or operator credential on its normal path.
+Device storage contains favorites, noncommercial local plans and city/theme
+preferences only. No key, identity document, card, GPS or external analytics.
+A versioned snapshot is validated before use; writes are serialized and committed
+before success is displayed. Failed/corrupt storage is not silently overwritten.
+This storage is not a critical commercial booking ledger or multi-device lock.
+Clearing browser/application data can remove local records; web origins are separate.
+No deletion/retention timer or provider policy was introduced. Previous private
+SQLite/key files are untouched and accessible only via optional main_api.dart.
+Bundled sample catalog/photos are disclosed; local plans never claim supplier
+confirmation, verified eligibility, payment, liability or vehicle release.
+
+## Optional local API application (TASK-012/013)
 User approved SQLite persistence and explicitly requested restoring it after the
 workspace reverted. Default entrypoint uses that local API; the prototype section
 below describes only main_demo.dart. Existing records/operator key are preserved.

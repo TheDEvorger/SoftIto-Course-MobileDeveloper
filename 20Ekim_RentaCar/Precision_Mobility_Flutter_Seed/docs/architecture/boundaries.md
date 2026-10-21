@@ -9,12 +9,22 @@
 ## Future server modules
 IdentityAccess, Verification, Organizations, VehicleRegistry, Listings, Availability, Pricing, Bookings, Trips, Handover, Inspections, Payments, Payouts, Reviews, Notifications, Support, Audit.
 
-## Implemented local workspace
+## Default serverless renter application
+main.dart → app/rental_app.dart → features/rental. Domain owns vehicle/calendar
+money values and local quote/reservation contracts; data owns bundled catalog,
+versioned snapshot serialization, device storage and serialized writes. Application
+controller owns notifications/loading; presentation contains customer workflows.
+Device writes commit before success is shown. Corrupt storage is preserved and
+reported, never replaced silently. No HTTP import is reachable from the normal
+renter data layer. SharedPreferencesAsync is used only for noncommercial local
+planning, favorites and preferences, not verified rental contracts/critical data.
+
+## Optional local API workspace
 `server/validation.py` owns input validation; `operations.py` owns listing,
 calendar and pricing rules; `pricing.py` signs/verifies quote payloads; `database.py` owns persistent records
 and transactional allocation; `http_server.py` owns routes and authorization.
 `examples.py` initializes only the isolated example DB; scope selection occurs
-server-side before authorization/routing. The existing SQLite records/key are preserved. `main.dart` starts the API app;
+server-side before authorization/routing. The existing SQLite records/key are preserved. `main_api.dart` starts the optional API app;
 `main_demo.dart` starts the historical simulation. Catalog/reservation controllers
 own client state; app composition injects them into the new presentation.
 `shared/design` and `core/theme/studio_*` own the rebuilt visual primitives.

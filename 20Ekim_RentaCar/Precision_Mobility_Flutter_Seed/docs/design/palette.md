@@ -35,3 +35,10 @@ listings show only their own image or an honest missing-photo placeholder.
 Text/selection and outline contrast are checked in both themes. Responsive tests
 cover 320/1440px with 100%/180% text. Wide tables switch to cards for large text;
 short pages align at the top. Historical demo still uses its separate legacy theme.
+
+## Serverless renter presentation (TASK-014)
+Normal navigation is Keşfet/Favoriler/Planlarım/Profil. It uses the shared colors,
+a compact automotive hero, category selection, photographic cards and local
+reservation receipts. Operator connection/state indicators are absent from this
+customer flow. Roboto fonts are bundled as PrecisionRoboto; brand SVG supplies
+web/macOS icons. This does not record a new user-approved fixed color restriction.

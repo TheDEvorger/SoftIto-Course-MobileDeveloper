@@ -22,6 +22,7 @@ flutter:
     - assets/images/sample-touring.png
     - assets/images/sample-electric.png
     - assets/images/sample-suv.png
+    - assets/images/sample-compact.png
     - assets/fonts/Roboto_LICENSE.txt
   fonts:
     - family: PrecisionRoboto

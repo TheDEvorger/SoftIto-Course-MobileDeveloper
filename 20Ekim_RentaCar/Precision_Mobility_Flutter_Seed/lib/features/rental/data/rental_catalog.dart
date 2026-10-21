@@ -10,7 +10,7 @@ const rentalCatalog = <RentalVehicle>[
       pickup: 'Kadıköy',
       energy: 'Benzin',
       dailyMinor: 145000,
-      image: 'electric',
+      image: 'compact',
       description:
           'Şehir içindeki kısa rotalar için pratik bir seçenek. Kompakt sınıf, otomatik vites ve kolay park.'),
   RentalVehicle(
@@ -81,7 +81,7 @@ const rentalCatalog = <RentalVehicle>[
       pickup: 'Bakırköy',
       energy: 'Benzin',
       dailyMinor: 225000,
-      image: 'electric',
+      image: 'compact',
       description:
           'Şehir ve uzun yol arasında dengeli bir seçenek. Kompakt gövde, kullanışlı iç mekân.'),
   RentalVehicle(
@@ -92,7 +92,7 @@ const rentalCatalog = <RentalVehicle>[
       pickup: 'Kızılay',
       energy: 'Benzin',
       dailyMinor: 135000,
-      image: 'electric',
+      image: 'compact',
       description:
           'Gündelik işlerinize ve kısa kaçamaklara uyum sağlayan ekonomik sınıf otomobil.'),
   RentalVehicle(
