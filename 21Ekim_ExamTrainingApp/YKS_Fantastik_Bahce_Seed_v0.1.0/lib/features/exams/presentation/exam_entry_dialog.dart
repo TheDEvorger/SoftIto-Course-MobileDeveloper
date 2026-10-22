@@ -82,9 +82,8 @@ class _ExamEntryDialogState extends State<ExamEntryDialog> {
 
   void _initSubjectEntries(ExamSession? session) {
     if (_scope == 'branch') {
-      final initialScore = session?.scores.isNotEmpty == true
-          ? session!.scores.first
-          : null;
+      final initialScore =
+          session?.scores.isNotEmpty == true ? session!.scores.first : null;
       _subjectEntries = [
         SubjectEntryData(
           subjectId: initialScore?.subjectId ??
@@ -441,14 +440,16 @@ class _ExamEntryDialogState extends State<ExamEntryDialog> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _buildSummaryColumn('Toplam Net',
-                            liveTotalNet.toStringAsFixed(2), GardenPalette.mossEmerald),
+                        _buildSummaryColumn(
+                            'Toplam Net',
+                            liveTotalNet.toStringAsFixed(2),
+                            GardenPalette.mossEmerald),
                         _buildSummaryColumn('Doğru', '$liveTotalCorrect',
                             GardenPalette.mossEmerald),
                         _buildSummaryColumn('Yanlış', '$liveTotalWrong',
                             GardenPalette.peachCoral),
-                        _buildSummaryColumn('Boş', '$liveTotalBlank',
-                            Colors.grey.shade600),
+                        _buildSummaryColumn(
+                            'Boş', '$liveTotalBlank', Colors.grey.shade600),
                       ],
                     ),
                   ),

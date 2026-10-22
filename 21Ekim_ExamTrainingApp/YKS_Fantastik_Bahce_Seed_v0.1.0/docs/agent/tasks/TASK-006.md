@@ -1,6 +1,6 @@
 # TASK-006 | Deneme CRUD ve net hesap
 
-**Durum:** BEKLIYOR (ajan gerçek sonuçtan sonra günceller)
+**Durum:** TAMAMLANDI
 
 ## Önkoşul
 

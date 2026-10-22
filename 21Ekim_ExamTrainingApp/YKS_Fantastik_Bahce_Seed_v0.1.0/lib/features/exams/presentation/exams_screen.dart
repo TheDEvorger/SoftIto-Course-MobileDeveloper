@@ -201,8 +201,7 @@ class _ExamsScreenState extends State<ExamsScreen> {
 
     final correct = int.tryParse(correctController.text);
     final wrong = int.tryParse(wrongController.text);
-    final questionCount =
-        int.tryParse(quickQuestionCountController.text) ?? 40;
+    final questionCount = int.tryParse(quickQuestionCountController.text) ?? 40;
     final isValid = correct != null &&
         wrong != null &&
         NetCalculator.fitsExam(

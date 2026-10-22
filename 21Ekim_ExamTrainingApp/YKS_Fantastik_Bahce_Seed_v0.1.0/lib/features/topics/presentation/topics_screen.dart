@@ -11,6 +11,7 @@ import '../../../shared/widgets/garden_inputs.dart';
 import '../../../shared/widgets/garden_progress.dart';
 import '../../../shared/widgets/seed_notice.dart';
 import 'subject_detail_screen.dart';
+import 'topic_map_screen.dart';
 
 class TopicsScreen extends StatefulWidget {
   const TopicsScreen({this.repository, super.key});
@@ -110,12 +111,20 @@ class _TopicsScreenState extends State<TopicsScreen> {
       key: const PageStorageKey<String>('topics'),
       padding: const EdgeInsets.all(16),
       children: [
-        const ForestHeroCard(
+        ForestHeroCard(
           assetPath: GardenScenes.glasshouse,
           tag: '📚 Konu ve Ders Takibi',
           title: 'Botanik Bilgi Bahçesi',
           subtitle: 'Bitirdiğin her konu bahçende yeni bir yaprak açar.',
-          height: 190,
+          height: 200,
+          actionLabel: 'Konu Ağacı & Tekrar 🗺️',
+          onAction: () {
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => TopicMapScreen(repository: _repo),
+              ),
+            );
+          },
         ),
         const SizedBox(height: 12),
         const SeedNotice(),
@@ -147,11 +156,15 @@ class _TopicsScreenState extends State<TopicsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    '$stage Genel Müfredat İlerlemesi',
-                    style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      '$stage Genel Müfredat İlerlemesi',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
                   ),
+                  const SizedBox(width: 8),
                   Text(
                     '$completedTopics / $totalTopics Konu',
                     style: const TextStyle(

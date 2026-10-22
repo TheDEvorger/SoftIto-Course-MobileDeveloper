@@ -110,7 +110,8 @@ void main() {
       expect(afterDelete, isEmpty);
     });
 
-    testWidgets('ExamsScreen shows empty state initially and adds exam via quick calculator',
+    testWidgets(
+        'ExamsScreen shows empty state initially and adds exam via quick calculator',
         (tester) async {
       await tester.pumpWidget(
         MaterialApp(

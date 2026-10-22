@@ -94,13 +94,17 @@ class _GardenPrimaryButtonState extends State<GardenPrimaryButton> {
                           Icon(widget.icon, color: Colors.white, size: 20),
                           const SizedBox(width: 8),
                         ],
-                        Text(
-                          widget.label,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0.3,
+                        Flexible(
+                          child: Text(
+                            widget.label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.3,
+                            ),
                           ),
                         ),
                       ],
@@ -192,12 +196,16 @@ class _GoldenActionButtonState extends State<GoldenActionButton> {
                 children: [
                   Icon(widget.icon, color: GardenPalette.inkPlum, size: 20),
                   const SizedBox(width: 8),
-                  Text(
-                    widget.label,
-                    style: const TextStyle(
-                      color: GardenPalette.inkPlum,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
+                  Flexible(
+                    child: Text(
+                      widget.label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: GardenPalette.inkPlum,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   if (widget.badgeText != null) ...[

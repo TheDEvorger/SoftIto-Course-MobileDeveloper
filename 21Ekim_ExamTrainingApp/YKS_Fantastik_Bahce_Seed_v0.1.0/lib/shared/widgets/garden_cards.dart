@@ -115,77 +115,76 @@ class ForestHeroCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(18),
+              if (tag != null)
+                Positioned(
+                  top: 16,
+                  left: 16,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: GardenPalette.mossEmerald.withAlpha(220),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      tag!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              Positioned(
+                bottom: 16,
+                left: 16,
+                right: 16,
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    if (tag != null)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: GardenPalette.mossEmerald.withAlpha(220),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          tag!,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    else
-                      const SizedBox.shrink(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 21,
-                            fontWeight: FontWeight.w800,
-                            letterSpacing: -0.3,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          subtitle,
-                          style: const TextStyle(
-                            color: Color(0xFFF2F8E8),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        if (actionLabel != null && onAction != null) ...[
-                          const SizedBox(height: 12),
-                          InkWell(
-                            onTap: onAction,
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: -0.3,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: Color(0xFFF2F8E8),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    if (actionLabel != null && onAction != null) ...[
+                      const SizedBox(height: 12),
+                      InkWell(
+                        onTap: onAction,
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: GardenPalette.peachCoral,
                             borderRadius: BorderRadius.circular(12),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: GardenPalette.peachCoral,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text(
-                                actionLabel!,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                          ),
+                          child: Text(
+                            actionLabel!,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ],
-                      ],
-                    ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -494,17 +493,20 @@ class BotanicalSectionHeader extends StatelessWidget {
             ),
           ),
           if (actionText != null && onAction != null)
-            TextButton(
-              onPressed: onAction,
-              style: TextButton.styleFrom(
-                visualDensity: VisualDensity.compact,
-                foregroundColor: isDark
-                    ? const Color(0xFFA4D49B)
-                    : GardenPalette.mossEmerald,
-              ),
-              child: Text(
-                actionText!,
-                style: const TextStyle(fontWeight: FontWeight.w600),
+            Flexible(
+              child: TextButton(
+                onPressed: onAction,
+                style: TextButton.styleFrom(
+                  visualDensity: VisualDensity.compact,
+                  foregroundColor: isDark
+                      ? const Color(0xFFA4D49B)
+                      : GardenPalette.mossEmerald,
+                ),
+                child: Text(
+                  actionText!,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
               ),
             ),
         ],

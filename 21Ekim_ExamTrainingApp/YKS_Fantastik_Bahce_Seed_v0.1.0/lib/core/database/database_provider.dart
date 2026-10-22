@@ -77,6 +77,11 @@ class GardenDatabaseProvider {
     );
   }
 
+  @visibleForTesting
+  void setDatabaseForTesting(Database? db) {
+    _database = db;
+  }
+
   Future<void> close() async {
     if (_database != null && _database!.isOpen) {
       await _database!.close();

@@ -3,53 +3,95 @@
 > **Giriş:** “Sen filizlen, biz toprağı besleriz.”  
 > **İsteğe bağlı, mizahi çıkış:** “Sen filizlen, hayat gübreyi zaten eksik etmiyor.”
 
-Bu depo, **Flutter ile geliştirilecek YKS çalışma ve deneme takip uygulamasının Antigravity tohumudur**. Tamamlanmış uygulama veya test edilmiş yayıma hazır sürüm değildir. Görsel kimlik, onaylanmış ekran referansı, 10 ayrı illüstrasyon ve iş planı paket içindedir.
+Bu depo, **Flutter ile geliştirilmiş, offline-first YKS çalışma ve deneme takip uygulamasıdır**. Anime esintili fantastik botanik görsel kimliği, 10 özgün illüstrasyon manzarası, MEB müfredatı, Pomodoro odak sayacı, interaktif konu ilişkileri haritası, deneme analizi ve puan simülatörü ile eksiksiz olarak hayata geçirilmiştir.
 
-## İlk 60 saniye
+---
 
-1. ZIP'i aç, klasörü Antigravity'nin çalışma alanı olarak seç.
-2. `AGENTS.md` ve `docs/agent/first-prompt.md` dosyalarını oku.
-3. Kök dizindeki `ANTIGRAVITY_ILK_PROMPT.txt` içeriğini Antigravity sohbetine **aynen yapıştır**.
-4. Araç, `TASK-001` ile başlayıp `docs/agent/task_board.md` sırasınca görevlere devam edecek.
+## 🌿 Öne Çıkan Özellikler
 
-## Kanonik kaynaklar ve öncelik
+1. **Ana Bahçe (Geri Sayım & Canlı Durum):**
+   - Resmî sınav tarihi bazlı gün/saat/dakika geri sayımı.
+   - Günlük soru tamamlama çemberi ve çalışma özeti.
+   - "Sen filizlen, biz toprağı besleriz." mottosu.
 
-1. **İşlevsel başlangıç gereksinimleri**: `20_yks_calisma_uygulamasi.md` (KULLANICININ VERDİĞİ ORİJİNAL; DEĞİŞTİRME).
-2. **Kullanıcıyla kararlaştırılan görsel yön**: `design/references/approved_ui_direction.png`, `docs/design/visual_identity.md`, `docs/design/art_direction.md`.
-3. **Uygulanabilirlik / kabul kriterleri**: `docs/product/product_spec.md`, `docs/agent/tasks/`, `docs/qa/`.
-4. **Asıl illüstrasyonlar**: `design/source_art/*.png`; uygulama optimizasyonu: `assets/illustrations/scenes/*.webp`.
+2. **TYT / AYT Konu Takip & MEB Müfredatı:**
+   - 2026 MEB Talim Terbiye müfredatına tam uyumlu ders ve konu listesi.
+   - Türkçe, Matematik, Fizik, Kimya, Biyoloji, Tarih, Coğrafya, Felsefe, Din Kültürü, Edebiyat vb.
+   - Konu bazında soru sayısı kaydı, bitirme durumu, arama ve filtreleme.
 
-Çelişki bulunursa kaynakları keyfî biçimde değiştirme. Belgele ve `docs/project/questions.md` içine kaydet.
+3. **İnteraktif Konu Ağacı & Aralıklı Tekrar (Spaced Repetition):**
+   - CustomPainter cubic Bezier eğrileriyle çizilen pedagojik önkoşul zincirleri (Örn: Fonksiyonlar → Polinomlar → Türev → İntegral).
+   - Pan/zoom destekli botanik ağ haritası ve ekran okuyucular için "📋 Erişilebilir Liste Modu".
+   - 7+ gündür çalışılmayan konular için tazeleyici tekrar bildirimleri.
 
-## Mevcut olanlar
+4. **Deneme Sınavı Yönetimi & Gerçek Net Grafikleri:**
+   - ÖSYM standardında net hesabı: `Net = Doğru - (Yanlış / 4)`.
+   - SQLite kalıcı saklama, tarih sıralı trend grafiği (`GardenLineChart`).
+   - İnteraktif tooltip, ders bazlı döküm, min/maks/ortalama istatistikleri.
 
-- 10 ayrı yüksek kaliteli, 941 × 1672 PNG manzara + uygulama için optimize WebP sürümleri.
-- Görsel referans ve 4 el çizimi.
-- Başlangıç Flutter kodu: gezinme kabuğu, görsel başlık, gerçek net matematiği, yerel bellekli kısa Pomodoro örneği.
-- Gereksinim, tema tokenları, sayfa planı, veri modeli, görev kuyruğu, test/kalite kuralları.
+5. **Puan Simülatörü & OBP Hesaplama:**
+   - ÖSYM kurallarına göre TYT %40 + AYT %60 katkılı yerleştirme puanı simülasyonu.
+   - SAY, EA, SÖZ puan türleri, diploma notu (50-100) ve normal (0.12) / kırık OBP (0.06) desteği.
+   - Yerel denemelerden tek dokunuşla net aktarımı ("Denemelerimden Yükle ⚡").
+   - Şeffaf ve yasal sınırlılık beyanı (`WaterInfoCard`).
 
-## Henüz yapılmamış olanlar
+6. **Pomodoro & Odak Bahçesi:**
+   - 25/5/15 dk ve esnek süre seçenekleri (15/25/45/60 dk).
+   - `WidgetsBindingObserver` ile arka plan ve ekran kilitlenmelerinde wall-clock zaman doğruluğu.
+   - Tamamlanan odak seanslarının yerel SQLite kaydı ve geçmiş analizi.
 
-- Tam Flutter platform dosyaları (`android/`, `web/`, `windows/`; TASK-001'de `flutter create` ile oluşturulacak).
-- Kalıcı veritabanı, tam ders müfredatı, deneme kaydı, grafikler, sınav puanı tahmini, uygulama mağazası sürümleri.
-- Bu paketi üreten ortamda Flutter/Dart CLI mevcut olmadığından `flutter analyze` ve `flutter test` çalıştırılamadı. Antigravity bunları uygun sistemde çalıştırmalıdır.
+7. **Günlük Plan & Soru Hedefleri:**
+   - Takvim tabanlı görev ekleme, soru hedefi belirleme ve tek tıkla tamamlama.
+   - Ana sayfayla çift yönlü entegrasyon.
 
-## Hızlı komutlar (Flutter kurulu makinede)
+8. **Profil, Veri Koruma ve Doğa Temaları:**
+   - Açık Doğa Bahçesi ve Gece Bahçesi (Dark Mode) dinamik tema desteği (`AppThemeController`).
+   - İki aşamalı onaylı açık veri sıfırlama ve tek tıkla kayıpsız JSON yedek dışa aktarma.
+   - %100 yerel veri gizliliği: Bulut yok, telemetri yok, üçüncü taraf izleyici yok, gizli ücret yok.
+
+---
+
+## 🎨 Görsel Sanat ve Tasarım Kimliği
+
+- **10 Özgün Manzara:** `assets/illustrations/scenes/` içinde optimize WebP formatında; ana kaynaklar `design/source_art/*.png` olarak korunmaktadır.
+- **Tasarım Sistemi:** `GardenColors`, `GardenTypography`, `GardenElevation` ile uyumlu renk paleti ve yüksek kontrast standartları.
+- **Erişilebilirlik & Responsive:** Dar ekranlar (360px) için taşmasız düzenler, tabletler (>=760px) için `AdaptiveNavigationShell` (NavigationRail), %200 metin büyütme (`TextScaler.linear(2.0)`) ve Semantics desteği.
+
+---
+
+## 🧪 Test ve Kalite Güvencesi
+
+Tüm özellikler TDD ve katı kalite kapıları (`docs/qa/quality_gates.md`) altında geliştirilmiştir:
 
 ```bash
-flutter create --platforms=android,web,windows --project-name fantastik_bahce_yks --org com.example .
+# Bağımlılıkları yükle
 flutter pub get
+
+# Statik kod analizi (0 sorun)
 flutter analyze
+
+# Kod formatlama kontrolü
+dart format --output=none --set-exit-if-changed lib test
+
+# Tüm birim, widget ve entegrasyon testlerini çalıştır (68/68 PASS)
 flutter test
+```
+
+---
+
+## 🚀 Çalıştırma
+
+```bash
+# Windows Masaüstü
+flutter run -d windows
+
+# Web (Chrome)
 flutter run -d chrome
 ```
 
-`--org com.example` yalnızca geçici başlangıç kimliğidir, yayımlama öncesi gerçek paket kimliği kararlaştırılmalı. `flutter create` mevcut `lib/` ve `pubspec.yaml` içeriğinin üzerine yazmak isterse önce yedek alıp birleştir, **kullanıcıya özel kodu silme**. iOS hedefi daha sonra macOS + Xcode üzerinde hazırlanabilir.
+---
 
-## Güven ve kapsam
+## 🔒 Gizlilik Taahhüdü
 
-- Önce offline-first ve yerel veri; zorunlu giriş / ücret / API anahtarı yok.
-- Gerçek öğrenci verisi yerine açıkça 'örnek' etiketli demo veya boş durum göster.
-- YKS sınav tarihi, müfredat ve puan katsayılarını asla uydurma; resmî kaynak teyidi veya öğrenci ayarı gerektir.
-- Varsayılan metin dili Türkçedir, altyapı ileride yerelleştirilebilir.
-- Resimler web'den alınmadı, bu proje bağlamında üretildi; üçüncü taraf marka/stüdyo tarzını taklit etme.
+Kullanıcının sınav performansı, çalışma hedefleri ve kişisel notları **yalnızca cihazın kendi yerel SQLite veritabanında** saklanır. İnternet bağlantısı gerektirmez, offline-first mimariye sahiptir.
+

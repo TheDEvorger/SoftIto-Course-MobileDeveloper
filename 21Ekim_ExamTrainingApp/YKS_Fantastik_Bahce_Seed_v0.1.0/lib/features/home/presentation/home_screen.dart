@@ -4,7 +4,9 @@ import '../../../core/assets/garden_scenes.dart';
 import '../../../core/content/app_copy.dart';
 import '../../../core/database/database_provider.dart';
 import '../../../core/theme/garden_palette.dart';
+import '../../../domain/models/daily_task.dart';
 import '../../../domain/models/student_preferences.dart';
+import '../../../domain/repositories/planning_repository.dart';
 import '../../../domain/repositories/preferences_repository.dart';
 import '../../../shared/widgets/countdown_card.dart';
 import '../../../shared/widgets/garden_buttons.dart';
@@ -12,10 +14,20 @@ import '../../../shared/widgets/garden_cards.dart';
 import '../../../shared/widgets/garden_progress.dart';
 import '../../../shared/widgets/preferences_dialog.dart';
 import '../../../shared/widgets/seed_notice.dart';
+import '../../planning/presentation/daily_plan_screen.dart';
+import '../../planning/presentation/task_entry_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({required this.onStartFocus, super.key});
+  const HomeScreen({
+    required this.onStartFocus,
+    this.preferencesRepository,
+    this.planningRepository,
+    super.key,
+  });
+
   final VoidCallback onStartFocus;
+  final PreferencesRepository? preferencesRepository;
+  final PlanningRepository? planningRepository;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,46 +35,100 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   StudentPreferences? _preferences;
-  PreferencesRepository? _repo;
+  PreferencesRepository? _prefRepo;
+  PlanningRepository? _planRepo;
+
+  List<DailyTask> _todayTasks = [];
+  DailyPlanSummary _planSummary = const DailyPlanSummary(
+    totalTasks: 0,
+    completedTasks: 0,
+    targetQuestions: 0,
+    completedQuestions: 0,
+  );
+
   bool _loading = true;
 
   @override
   void initState() {
     super.initState();
-    _loadPreferences();
+    _initData();
   }
 
-  Future<void> _loadPreferences() async {
+  Future<void> _initData() async {
     try {
-      final db = await GardenDatabaseProvider.instance.database;
-      _repo = PreferencesRepository(db);
-      final prefs = await _repo!.getPreferences();
-      if (mounted) {
-        setState(() {
-          _preferences = prefs;
-          _loading = false;
-        });
+      if (widget.preferencesRepository != null &&
+          widget.planningRepository != null) {
+        _prefRepo = widget.preferencesRepository;
+        _planRepo = widget.planningRepository;
+      } else {
+        final db = await GardenDatabaseProvider.instance.database;
+        _prefRepo = widget.preferencesRepository ?? PreferencesRepository(db);
+        _planRepo = widget.planningRepository ?? PlanningRepository(db);
       }
+      await _loadContent();
     } catch (_) {
-      if (mounted) {
-        setState(() {
-          _preferences = const StudentPreferences();
-          _loading = false;
-        });
-      }
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  Future<void> _loadContent() async {
+    if (_prefRepo == null || _planRepo == null) return;
+    setState(() => _loading = true);
+
+    final prefs = await _prefRepo!.getPreferences();
+    final today = DateTime.now();
+    final tasks = await _planRepo!.getTasksForDate(today);
+    final summary = await _planRepo!.getSummaryForDate(today);
+
+    if (mounted) {
+      setState(() {
+        _preferences = prefs;
+        _todayTasks = tasks;
+        _planSummary = summary;
+        _loading = false;
+      });
     }
   }
 
   Future<void> _openPreferences() async {
-    if (_repo == null) return;
+    if (_prefRepo == null) return;
     final updated = await PreferencesDialog.show(
       context,
-      repository: _repo!,
+      repository: _prefRepo!,
       initialPreferences: _preferences,
     );
     if (updated != null && mounted) {
       setState(() => _preferences = updated);
     }
+  }
+
+  Future<void> _openDailyPlan() async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => DailyPlanScreen(
+          planningRepository: _planRepo,
+        ),
+      ),
+    );
+    _loadContent();
+  }
+
+  Future<void> _openAddTask() async {
+    final task = await TaskEntryDialog.show(
+      context,
+      initialDate: DateTime.now(),
+    );
+
+    if (task != null && _planRepo != null) {
+      await _planRepo!.saveTask(task);
+      await _loadContent();
+    }
+  }
+
+  Future<void> _toggleTask(DailyTask task) async {
+    if (_planRepo == null) return;
+    await _planRepo!.toggleTaskDone(task.id, !task.isDone);
+    await _loadContent();
   }
 
   @override
@@ -72,6 +138,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ? 'Merhaba, $name! 🌱'
         : 'Bugün senin günün! 🌱';
     final field = _preferences?.field ?? 'Sayısal';
+
+    final progressRatio = _planSummary.targetQuestions > 0
+        ? _planSummary.questionProgress
+        : _planSummary.taskProgress;
 
     return ListView(
       key: const PageStorageKey<String>('home'),
@@ -89,6 +159,8 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 12),
         const SeedNotice(),
         const SizedBox(height: 12),
+
+        // YKS Countdown Header & Card
         BotanicalSectionHeader(
           title: 'YKS Geri Sayım Sayacı',
           subtitle: 'Kişiselleştirilmiş hedef sınav tarihi',
@@ -111,42 +183,140 @@ class _HomeScreenState extends State<HomeScreen> {
             onEditDate: _openPreferences,
           ),
         const SizedBox(height: 14),
-        const BotanicalSectionHeader(
+
+        // Today's Goals Section
+        BotanicalSectionHeader(
           title: 'Günün Hedefleri',
-          subtitle: 'Her gün küçük bir filizlenme',
+          subtitle: '${_todayTasks.length} adet planlanan görev',
           icon: Icons.check_circle_outline,
+          actionText: 'Tüm Planı Gör',
+          onAction: _openDailyPlan,
         ),
         GardenCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Bugünkü Plan',
+                  const Expanded(
+                    child: Text(
+                      'Bugünkü Hedef İlerlemesi',
+                      overflow: TextOverflow.ellipsis,
                       style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                  Text('0 / 120 Soru',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: GardenPalette.mossEmerald)),
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    _planSummary.targetQuestions > 0
+                        ? '${_planSummary.completedQuestions} / ${_planSummary.targetQuestions} Soru'
+                        : '${_planSummary.completedTasks} / ${_planSummary.totalTasks} Görev',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: GardenPalette.mossEmerald,
+                    ),
+                  ),
                 ],
               ),
-              const SizedBox(height: 8),
-              const LeafProgressBar(
-                progress: 0.0,
-                label: 'Soru hedefi ilerlemesi',
+              const SizedBox(height: 10),
+              LeafProgressBar(
+                progress: progressRatio,
+                label: 'Günün Tamamlanma Oranı',
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Günlük görevlerin ve çalışma planın TASK-009 ile aktifleşecek.',
-                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
-              ),
+              const SizedBox(height: 12),
+              if (_todayTasks.isEmpty) ...[
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'Bugün için henüz görev eklemedin. Birkaç küçük hedef koyarak başla.',
+                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: _openAddTask,
+                      icon: const Icon(Icons.add, size: 16),
+                      label: const Text('Hedef Ekle'),
+                    ),
+                  ],
+                ),
+              ] else ...[
+                ..._todayTasks.take(3).map((task) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Row(
+                      children: [
+                        Checkbox(
+                          value: task.isDone,
+                          activeColor: GardenPalette.mossEmerald,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          onChanged: (_) => _toggleTask(task),
+                        ),
+                        Expanded(
+                          child: Text(
+                            task.description,
+                            style: TextStyle(
+                              fontSize: 13,
+                              decoration: task.isDone
+                                  ? TextDecoration.lineThrough
+                                  : null,
+                              color: task.isDone ? Colors.grey : null,
+                            ),
+                          ),
+                        ),
+                        if (task.targetQuestions > 0)
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: GardenPalette.gardenPaper,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Text(
+                              '${task.targetQuestions} S',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: GardenPalette.mossEmerald,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
+                }),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton.icon(
+                      onPressed: _openAddTask,
+                      icon: const Icon(Icons.add, size: 16),
+                      label: const Text('Yeni Hedef Ekle'),
+                    ),
+                    TextButton(
+                      onPressed: _openDailyPlan,
+                      child: const Text('Tümünü Yönet →'),
+                    ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),
         const SizedBox(height: 14),
+
+        // Achievement Target Card
         GoldenAchievementCard(
           title:
               'Hedef Net: ${_preferences?.targetNet?.toStringAsFixed(1) ?? 'Belirlenmedi'}',
@@ -159,6 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: _openPreferences,
         ),
         const SizedBox(height: 20),
+
         GardenPrimaryButton(
           label: 'Odak Odasını Başlat (Pomodoro)',
           icon: Icons.timer_outlined,

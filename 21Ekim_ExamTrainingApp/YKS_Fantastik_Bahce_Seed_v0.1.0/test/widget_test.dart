@@ -12,11 +12,20 @@ void main() {
     databaseFactory = databaseFactoryFfi;
   });
 
+  late Database db;
+  late ExamRepository repo;
+
+  setUp(() async {
+    db = await GardenDatabaseProvider.openInMemory();
+    repo = ExamRepository(db);
+  });
+
+  tearDown(() async {
+    await db.close();
+  });
+
   testWidgets('ExamsScreen loads and renders header and calculator',
       (tester) async {
-    final db = await GardenDatabaseProvider.openInMemory();
-    final repo = ExamRepository(db);
-
     await tester.pumpWidget(
       MaterialApp(
         theme: GardenTheme.light,
@@ -33,7 +42,5 @@ void main() {
 
     expect(find.text('Deneme Takip Masası'), findsOneWidget);
     expect(find.text('Henüz Kayıtlı TYT Denemen Yok'), findsOneWidget);
-
-    await db.close();
   });
 }
