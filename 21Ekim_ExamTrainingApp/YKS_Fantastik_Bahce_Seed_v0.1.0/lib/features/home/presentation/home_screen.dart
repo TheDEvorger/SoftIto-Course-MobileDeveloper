@@ -14,6 +14,7 @@ import '../../../shared/widgets/garden_cards.dart';
 import '../../../shared/widgets/garden_progress.dart';
 import '../../../shared/widgets/preferences_dialog.dart';
 import '../../../shared/widgets/seed_notice.dart';
+import '../../mentors/presentation/mentors_screen.dart';
 import '../../planning/presentation/daily_plan_screen.dart';
 import '../../planning/presentation/task_entry_dialog.dart';
 
@@ -131,6 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
     await _loadContent();
   }
 
+  void _openMentors() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const MentorsScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final name = _preferences?.displayName;
@@ -155,6 +162,96 @@ class _HomeScreenState extends State<HomeScreen> {
           actionLabel: 'Odak Odasına Gir ⏳',
           onAction: widget.onStartFocus,
           height: 220,
+        ),
+        const SizedBox(height: 12),
+
+        // Kadim Akademi & Canlı Dersler Özel Kartı
+        InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: _openMentors,
+          child: Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [Color(0xFF203A43), Color(0xFF2C5364)],
+              ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.15),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    image: const DecorationImage(
+                      image: AssetImage('assets/illustrations/mentors/mentor_theron.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: const Text(
+                              'CANLI DERS',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 9,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          const Expanded(
+                            child: Text(
+                              'Kadim Bilge Hocalar',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 3),
+                      const Text(
+                        'Theron, Sylva, Ignis ve Valerius yayında! Soru sor ve taktik al.',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 11,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Icon(Icons.arrow_forward_ios, color: Colors.white70, size: 14),
+              ],
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         const SeedNotice(),

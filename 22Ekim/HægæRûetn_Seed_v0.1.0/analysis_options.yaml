@@ -1,0 +1,11 @@
+include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    invalid_assignment: error
+    missing_required_param: error
+  exclude:
+    - build/**
+linter:
+  rules:
+    prefer_const_constructors: true
+    avoid_print: true
