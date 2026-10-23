@@ -1,3 +1,4 @@
+Not Obsidian kullanarak yazıldı tablolar için excalidraw kullanıldı.
 ## Sözleşmeler, SOLID prensipleri & OOp mimarisi
 ### 1.1 Interface (arayüz/sözleşme)
 **Sözlük anlamı:** 
