@@ -1,0 +1,11 @@
+name = "haegaruuetn-ai-proxy"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+
+# Worker variables
+[vars]
+ENVIRONMENT = "production"
+# CLIENT_SECRET can be added via wrangler secret or here for development
+
+# Secrets (Do NOT write your real GROQ_API_KEY here):
+# Use: wrangler secret put GROQ_API_KEY

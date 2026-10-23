@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "cfe08cf5e1ec52d0",
+    "type": "split",
+    "children": [
+      {
+        "id": "4d25d2eb9894f43d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "024301d086590771",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Yeni sekme"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "323528bece903dce",
+    "type": "split",
+    "children": [
+      {
+        "id": "9ede574f0aa251f2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aa88c01f4c09088e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Dosya Gezgini"
+            }
+          },
+          {
+            "id": "f858532bc35864ee",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Ara"
+            }
+          },
+          {
+            "id": "306ba722c292429b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Yer İmleri"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "a8dee9abffd28308",
+    "type": "split",
+    "children": [
+      {
+        "id": "be4ce8b230215252",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "89d912934665f347",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Geri Bağlantılar"
+            }
+          },
+          {
+            "id": "cea901c13489d486",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Giden bağlantılar"
+            }
+          },
+          {
+            "id": "c53664008141be04",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiketler"
+            }
+          },
+          {
+            "id": "bce3f1f3ef5347f1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Tüm özellikler"
+            }
+          },
+          {
+            "id": "eaf5ccc1e1d5d9ea",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Anahat"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Hızlı geçişi aç": false,
+      "graph:Grafik görünümünü aç": false,
+      "canvas:Yeni tuval oluşturun": false,
+      "daily-notes:Bugünün Notunu Aç": false,
+      "templates:Şablon ekle": false,
+      "command-palette:Komut paletini aç": false,
+      "bases:Yeni taban oluştur": false,
+      "obsidian-excalidraw-plugin:New drawing": false
+    }
+  },
+  "active": "024301d086590771",
+  "lastOpenFiles": [
+    "23Ekim/cuma_ogledensonra_v2.md",
+    "23Ekim/presentation, domain, data.md",
+    "23Ekim/Başlıksız.md",
+    "23Ekim/State Değiştiğinde.md",
+    "23Ekim/extends, implements, with.md",
+    "23Ekim/Cubit, BLoC.md",
+    "Excalidraw/Drawing 2026-10-23 14.18.15.excalidraw.md",
+    "The-Sound-of-Silence-Celtic-Instrumental_Media_ELsqu2MXGYQ_003_480p.mp4",
+    "Excalidraw",
+    "Başlıksız.md"
+  ]
+}
